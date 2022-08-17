@@ -15,8 +15,9 @@ jobs:
   build1:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       # - name: Release
       #   uses: softprops/action-gh-release@v1
       #   with:
@@ -27,10 +28,11 @@ jobs:
 
 
   build2:
+    needs: build1
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      # - name: Checkout
+      #   uses: actions/checkout@v2
       # - name: Release
       #   uses: softprops/action-gh-release@v1
       #   with:
