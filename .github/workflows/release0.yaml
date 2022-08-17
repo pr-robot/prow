@@ -9,7 +9,6 @@ env:
   KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
   KUBESPRAY_IMAGE_NAME: kubespray
   SPRAY_JOB_IMAGE_NAME: spray-job
-  KUBESPRAY_TAG:
 
 jobs:
   build1:
@@ -24,7 +23,7 @@ jobs:
       #     files: README.md
       - name: unit test
         run: |
-            VERSION=$(git describe --tags --abbrev=8 --dirty)
+            VERSION=$GITHUB_REF_NAME
             echo $VERSION
 
   build2:
