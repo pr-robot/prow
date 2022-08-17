@@ -2,8 +2,14 @@ name: release
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches:
+      - main
+
+env:
+  KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
+  KUBESPRAY_IMAGE_NAME: kubespray
+  SPRAY_JOB_IMAGE_NAME: spray-job
+  KUBESPRAY_TAG: master
 
 jobs:
   build:
@@ -11,7 +17,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: README.md
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     files: README.md
+      - name: unit test
+        run: |
+            echo $KUBESPRAY_TAG
