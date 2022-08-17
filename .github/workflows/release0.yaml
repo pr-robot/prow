@@ -2,8 +2,8 @@ name: release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 env:
   KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
