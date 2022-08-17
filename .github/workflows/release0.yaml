@@ -1,0 +1,40 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
+  KUBESPRAY_IMAGE_NAME: kubespray
+  SPRAY_JOB_IMAGE_NAME: spray-job
+  KUBESPRAY_TAG:
+
+jobs:
+  build1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     files: README.md
+      - name: unit test
+        run: |
+            VERSION=$(git describe --tags --abbrev=8 --dirty)
+
+
+  build2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     files: README.md
+      - name: unit test
+        run: |
+            echo $VERSION
