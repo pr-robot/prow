@@ -25,7 +25,7 @@ jobs:
       - name: unit test
         run: |
             VERSION=$(git describe --tags --abbrev=8 --dirty)
-
+            echo $VERSION
 
   build2:
     needs: build1
