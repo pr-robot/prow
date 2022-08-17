@@ -1,6 +1,9 @@
 name: release
 
-on: push
+on:
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
   static-check:
@@ -10,8 +13,10 @@ jobs:
       contents: read
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Release
         uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: README.md
- 
