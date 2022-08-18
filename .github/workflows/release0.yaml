@@ -52,3 +52,18 @@ jobs:
             rm -rf test_${GITHUB_REF_NAME}_123.txt
             wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
             cat test_${GITHUB_REF_NAME}_123.txt
+            ls
+            
+  build3:
+    needs: build2
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     files: README.md
+      - name: unit test
+        run: |
+              ls
+              cat test_${GITHUB_REF_NAME}_123.txt
+
