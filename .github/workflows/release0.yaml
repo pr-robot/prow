@@ -54,7 +54,7 @@ jobs:
             cat test_${GITHUB_REF_NAME}_123.txt
             echo 123 > test_test_123.txt
             ls
-            
+
       - name: Upload output file
         uses: actions/upload-artifact@v3
         with:
@@ -76,7 +76,7 @@ jobs:
       - name: unit test
         run: |
               ls
-              
+
   build4:
     needs: build3
-    uses: ./.github/workflows/call_binary.yaml
+    uses: ./.github/workflows/call/call_binary.yaml
