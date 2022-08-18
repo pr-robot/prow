@@ -54,6 +54,12 @@ jobs:
             cat test_${GITHUB_REF_NAME}_123.txt
             ls
             
+      - name: Upload output file
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-log-file
+          path: test_${GITHUB_REF_NAME}_123.txt
+            
   build3:
     needs: build2
     runs-on: ubuntu-latest
@@ -61,6 +67,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: output-log-file
       - name: unit test
         run: |
               ls
