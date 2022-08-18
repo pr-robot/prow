@@ -40,15 +40,15 @@ jobs:
       - name: unit test
         run: |
             echo ${{ secrets.TEST }}
-            echo 你们好哇 > test_123.txt
+            echo 你们好哇 > test_${GITHUB_REF_NAME}_123.txt
 
             wget https://devtools.qiniu.com/qshell-v2.8.0-linux-amd64.tar.gz
             tar -zxvf qshell-v2.8.0-linux-amd64.tar.gz
             mv qshell /usr/local/bin/
             qshell account -w ${{ secrets.QINIU_AK }} ${{ secrets.QINIU_SK }} 'dce-ci'
-
-            qshell delete   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_123.txt
-            qshell rput   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_123.txt  ./test_123.txt
-            rm -rf test_123.txt
-            wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_123.txt
-            cat test_123.txt
+            # delete the same name of old file
+            qshell delete   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
+            qshell rput   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt  ./test_${GITHUB_REF_NAME}_123.txt
+            rm -rf test_${GITHUB_REF_NAME}_123.txt
+            wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
+            cat test_${GITHUB_REF_NAME}_123.txt
