@@ -79,4 +79,4 @@ jobs:
 
   build4:
     needs: build3
-    uses: ./.github/workflows/call/call_binary.yaml
+    uses: ./.github/workflows/call_binary.yaml
