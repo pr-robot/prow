@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: output-log-file
-          path: test_${GITHUB_REF_NAME}_123.txt
+          path: /home/test_${GITHUB_REF_NAME}_123.txt
             
   build3:
     needs: build2
@@ -74,5 +74,5 @@ jobs:
       - name: unit test
         run: |
               ls
-              cat test_${GITHUB_REF_NAME}_123.txt
+              cat /home/test_${GITHUB_REF_NAME}_123.txt
 
