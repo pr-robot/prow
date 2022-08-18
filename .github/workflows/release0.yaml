@@ -47,7 +47,7 @@ jobs:
             mv qshell /usr/local/bin/
             qshell account -w ${{ secrets.QINIU_AK }} ${{ secrets.QINIU_SK }} 'dce-ci'
 
-            qshell delete   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_123.txt  ./test_123.txt
+            qshell delete   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_123.txt
             qshell rput   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_123.txt  ./test_123.txt
             rm -rf test_123.txt
             wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_123.txt
