@@ -58,10 +58,9 @@ jobs:
     needs: build2
     runs-on: ubuntu-latest
     steps:
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     files: README.md
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: unit test
         run: |
               ls
