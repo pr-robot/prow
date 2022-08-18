@@ -40,3 +40,13 @@ jobs:
       - name: unit test
         run: |
             echo ${{ secrets.TEST }}
+            echo 你好 > test_123.txt
+
+            wget https://devtools.qiniu.com/qshell-v2.8.0-linux-amd64.tar.gz
+            tar -zxvf qshell-v2.8.0-linux-amd64.tar.gz
+            mv qshell /usr/local/bin/
+            qshell account -w ${{ QINIU_AK }} ${{ QINIU_SK }} 'dce-ci'
+            qshell rput   ${{ QINIU_BU }} DaoCloud_Enterprise/dce5/test_123.txt  ./test_123.txt
+            rm -rf test_123.txt
+            wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_123.txt
+            cat test_123.txt
