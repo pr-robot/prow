@@ -76,5 +76,7 @@ jobs:
       - name: unit test
         run: |
               ls
-
-
+              
+  build4:
+    needs: build3
+    uses: ./.github/workflows/call_binary.yaml
