@@ -80,5 +80,4 @@ jobs:
   build4:
     needs: build1
     uses: ./.github/workflows/call_binary.yaml
-    secrets:
-      TEST: ${{ secrets.TEST }}
+    secrets: inherit
