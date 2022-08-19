@@ -81,4 +81,4 @@ jobs:
     needs: build1
     uses: ./.github/workflows/call_binary.yaml
     secrets:
-      envPAT: ${{ secrets.TEST }}
+      TEST: ${{ secrets.TEST }}
