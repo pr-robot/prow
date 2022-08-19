@@ -12,3 +12,4 @@ jobs:
       - name: unit test
         run: |
             echo 你好啊
+            echo ${{ secrets.TEST }}
