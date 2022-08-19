@@ -58,7 +58,7 @@ jobs:
       - name: Upload output file
         uses: actions/upload-artifact@v3
         with:
-          name: output-log-file
+          name: output-log-file-${GITHUB_REF_NAME}
           path: |
               test_main_123.txt
               test_test_123.txt
@@ -72,7 +72,7 @@ jobs:
       - name: Download a single artifact
         uses: actions/download-artifact@v3
         with:
-          name: output-log-file
+          name: output-log-file-${GITHUB_REF_NAME}
       - name: unit test
         run: |
               cat test_test_123.txt
