@@ -52,7 +52,7 @@ jobs:
             # rm -rf test_${GITHUB_REF_NAME}_123.txt
             # wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
             # cat test_${GITHUB_REF_NAME}_123.txt
-            echo 123 > test_test_123.txt
+            echo 12www3 > test_test_123.txt
             ls
 
       - name: Upload output file
