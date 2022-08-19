@@ -26,57 +26,59 @@ jobs:
         run: |
             VERSION=$GITHUB_REF_NAME
             echo $VERSION
-
-  build2:
-    needs: build1
-    runs-on: ubuntu-latest
-    steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v2
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     files: README.md
-      - name: unit test
-        run: |
-            # echo ${{ secrets.TEST }}
-            # echo 你们好哇 > test_${GITHUB_REF_NAME}_123.txt
-            #
-            # wget https://devtools.qiniu.com/qshell-v2.8.0-linux-amd64.tar.gz
-            # tar -zxvf qshell-v2.8.0-linux-amd64.tar.gz
-            # mv qshell /usr/local/bin/
-            # qshell account -w ${{ secrets.QINIU_AK }} ${{ secrets.QINIU_SK }} 'dce-ci'
-            # # delete the same name of old file
-            # qshell delete   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
-            # qshell rput   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt  ./test_${GITHUB_REF_NAME}_123.txt
-            # rm -rf test_${GITHUB_REF_NAME}_123.txt
-            # wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
-            # cat test_${GITHUB_REF_NAME}_123.txt
-            echo 12www3 > test_test_123.txt
-            ls
-
-      - name: Upload output file
-        uses: actions/upload-artifact@v3
-        with:
-          name: output-log-file-${GITHUB_REF_NAME}
-          path: |
-              test_main_123.txt
-              test_test_123.txt
-  build3:
-    needs: build2
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Download a single artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: output-log-file-${GITHUB_REF_NAME}
-      - name: unit test
-        run: |
-              cat test_test_123.txt
+  #
+  # build2:
+  #   needs: build1
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # - name: Checkout
+  #     #   uses: actions/checkout@v2
+  #     # - name: Release
+  #     #   uses: softprops/action-gh-release@v1
+  #     #   with:
+  #     #     files: README.md
+  #     - name: unit test
+  #       run: |
+  #           # echo ${{ secrets.TEST }}
+  #           # echo 你们好哇 > test_${GITHUB_REF_NAME}_123.txt
+  #           #
+  #           # wget https://devtools.qiniu.com/qshell-v2.8.0-linux-amd64.tar.gz
+  #           # tar -zxvf qshell-v2.8.0-linux-amd64.tar.gz
+  #           # mv qshell /usr/local/bin/
+  #           # qshell account -w ${{ secrets.QINIU_AK }} ${{ secrets.QINIU_SK }} 'dce-ci'
+  #           # # delete the same name of old file
+  #           # qshell delete   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
+  #           # qshell rput   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt  ./test_${GITHUB_REF_NAME}_123.txt
+  #           # rm -rf test_${GITHUB_REF_NAME}_123.txt
+  #           # wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
+  #           # cat test_${GITHUB_REF_NAME}_123.txt
+  #           echo 12www3 > test_test_123.txt
+  #           ls
+  #
+  #     - name: Upload output file
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: output-log-file-${GITHUB_REF_NAME}
+  #         path: |
+  #             test_main_123.txt
+  #             test_test_123.txt
+  # build3:
+  #   needs: build2
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Download a single artifact
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: output-log-file-${GITHUB_REF_NAME}
+  #     - name: unit test
+  #       run: |
+  #             cat test_test_123.txt
 
   build4:
-    needs: build3
+    needs: build1
     uses: ./.github/workflows/call_binary.yaml
+    secrets:
+      envPAT: ${{ secrets.TEST }}
