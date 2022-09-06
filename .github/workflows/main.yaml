@@ -10,10 +10,14 @@ env:
   KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
   KUBESPRAY_IMAGE_NAME: kubespray
   SPRAY_JOB_IMAGE_NAME: spray-job
+  ONLINE_REGISTER: ghcr.io
 
 jobs:
   build1:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
     steps:
       - uses: actions/checkout@v3
         with:
