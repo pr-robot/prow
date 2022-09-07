@@ -24,6 +24,8 @@ jobs:
           fetch-depth: 0
       - name: unit test
         run: |
+              echo "输出1 ${GITHUB_REPOSITORY}"
+              echo "输出2 ${{ github.repository }}"
               echo "${{secrets.DEV_KUBECONFIG}}" > kubeconfig
               cat kubeconfig
               # curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
