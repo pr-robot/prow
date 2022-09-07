@@ -6,11 +6,11 @@ on:
       - main
 
 
-env:
-  KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
-  KUBESPRAY_IMAGE_NAME: kubespray
-  SPRAY_JOB_IMAGE_NAME: spray-job
-  ONLINE_REGISTER: ghcr.io
+# env:
+#   KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
+#   KUBESPRAY_IMAGE_NAME: kubespray
+#   SPRAY_JOB_IMAGE_NAME: spray-job
+#   ONLINE_REGISTER: ghcr.io
 
 jobs:
   build1:
@@ -22,18 +22,23 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+        env:
+          DEV_KUBECONFIG: ${{secrets.DEV_KUBECONFIG}}
       # - name: Release
       #   uses: softprops/action-gh-release@v1
       #   with:
       #     files: README.md
       - name: unit test
         run: |
-           echo $GITHUB_REPOSITORY
-           echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
-           echo "REPO: ${{ env.REPO }}"
-           echo "${{ env.ONLINE_REGISTER }}/${{ env.REPO }}/kubespray:"
-            #VERSION=$GITHUB_REF_NAME
-            #echo $VERSION
+              echo "$DEV_KUBECONFIG" >> config.ini
+              cat config.ini
+              
+#            echo $GITHUB_REPOSITORY
+#            echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
+#            echo "REPO: ${{ env.REPO }}"
+#            echo "${{ env.ONLINE_REGISTER }}/${{ env.REPO }}/kubespray:"
+#             #VERSION=$GITHUB_REF_NAME
+#             #echo $VERSION
   #
   # build2:
   #   needs: build1
@@ -85,7 +90,7 @@ jobs:
   #       run: |
   #             cat test_test_123.txt
 
-  build4:
-    needs: build1
-    uses: ./.github/workflows/call_binary.yaml
-    secrets: inherit
+#   build4:
+#     needs: build1
+#     uses: ./.github/workflows/call_binary.yaml
+#     secrets: inherit
