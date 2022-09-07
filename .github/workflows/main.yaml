@@ -13,10 +13,9 @@ on:
 #   ONLINE_REGISTER: ghcr.io
 
 jobs:
-  call-images-build:
+  call-cd:
     uses: ./.github/workflows/call_cd.yaml
     secrets: inherit
-    needs: get-spray-ref
 
               
 #            echo $GITHUB_REPOSITORY
