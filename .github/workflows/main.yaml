@@ -30,12 +30,13 @@ jobs:
       #     files: README.md
       - name: unit test
         run: |
-            echo "$DEV_KUBECONFIG" >> config.ini
-            cat config.ini
-            curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-            chmod 700 get_helm.sh
-            ./get_helm.sh
-            helm list -A
+              echo "$DEV_KUBECONFIG" >> config.ini
+              echo "输出config.ini"
+              cat config.ini
+              # curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+              # chmod 700 get_helm.sh
+              # ./get_helm.sh
+              # helm list -A --kubeconfig config.ini
               
 #            echo $GITHUB_REPOSITORY
 #            echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
