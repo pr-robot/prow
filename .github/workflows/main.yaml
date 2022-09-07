@@ -14,7 +14,7 @@ on:
 
 jobs:
   call-images-build:
-    uses: ./.github/workflows/call-cd.yaml
+    uses: ./.github/workflows/call_cd.yaml
     secrets: inherit
     needs: get-spray-ref
 
