@@ -3,28 +3,14 @@ name: cd
 on: workflow_call
 
 jobs:
-  build1:
+  cd-to-demo-dev:
     runs-on: ubuntu-latest
     steps:
-      - name: Set env
+      - name: cd
         run: |
-          ORGANIZATION_NAME=$(echo ${GITHUB_REPOSITORY}| awk -F "/" '{print $1}')
-          echo "REPO=${ORGANIZATION_NAME,,}" >> ${GITHUB_ENV}
-
-      - name: Echo env
-        run: |
-          echo "REPO: ${{ env.REPO }}"
-          
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: unit test
-        run: |
-              echo "输出1 ${GITHUB_REPOSITORY}"
-              echo "输出2 ${{ github.repository }}"
+              rm -rf *
               echo "${{secrets.DEV_KUBECONFIG}}" > kubeconfig
-              cat kubeconfig
-              # curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-              # chmod 700 get_helm.sh
-              # ./get_helm.sh
+              curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+              chmod 700 get_helm.sh
+              ./get_helm.sh
               helm list -A --kubeconfig kubeconfig
