@@ -13,7 +13,7 @@ on:
 #   ONLINE_REGISTER: ghcr.io
 
 jobs:
-  call-cd:
+  cd:
     uses: ./.github/workflows/call_cd.yaml
     secrets: inherit
 
