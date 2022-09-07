@@ -18,4 +18,6 @@ jobs:
 
               # helm install
               echo "${{secrets.DEV_KUBECONFIG}}" > kubeconfig
+              chmod o-r kubeconfig
+              chmod g-r kubeconfig
               helm list -A --kubeconfig kubeconfig
