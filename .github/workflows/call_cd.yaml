@@ -8,8 +8,6 @@ jobs:
     steps:
       - name: cd
         run: |
-              # clean environment
-              rm -rf *
 
               # install helm binary
               curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
