@@ -22,22 +22,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-        env:
-          DEV_KUBECONFIG: ${{secrets.DEV_KUBECONFIG}}
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     files: README.md
       - name: unit test
         run: |
-            echo "输出secret： ${{secrets.DEV_KUBECONFIG}}"
-            echo "${{secrets.DEV_KUBECONFIG}}" > kubeconfig
-            echo "输出kubeconfig: $DEV_KUBECONFIG"
-            cat kubeconfig
-            # curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-            # chmod 700 get_helm.sh
-            # ./get_helm.sh
-            helm list -A --kubeconfig kubeconfig
+              echo "${{secrets.DEV_KUBECONFIG}}" > kubeconfig
+              cat kubeconfig
+              # curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+              # chmod 700 get_helm.sh
+              # ./get_helm.sh
+              helm list -A --kubeconfig kubeconfig
 
 
 
