@@ -5,7 +5,7 @@ on:
     branches:
       - main
 env:
-  HELLO_WORLD: HELLO_WORLD
+  ENVIROMENT: HELLO_WORLD
 
 # env:
 #   KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
@@ -14,11 +14,22 @@ env:
 #   ONLINE_REGISTER: ghcr.io
 
 jobs:
-  cd:
-    uses: ./.github/workflows/call_cd.yaml
-    secrets: inherit
-    with:
-      testenv: ${{ HELLO_WORLD }}
+  get_ref:
+    runs-on: ubuntu-latest
+    outputs:
+      enviroment: ${{ steps.get_ref.outputs.get-enviroment-runs-on }}
+
+    steps:
+      - name: get-enviroment
+        id: get-enviroment-runs-on
+        run: echo ::set-output name=enviroment::${{ env.ENVIROMENT }}
+
+      - name: cd
+        uses: ./.github/workflows/call_cd.yaml
+        secrets: inherit
+        needs: get-enviroment
+        with:
+          enviroment: ${{ needs.get-enviroment.outputs.enviroment }}
 
 
 #            echo $GITHUB_REPOSITORY
