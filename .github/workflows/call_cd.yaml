@@ -3,13 +3,13 @@ name: cd
 on:
   workflow_call:
     inputs:
-      environment-runs-on:
+      ENVIRONMENT_RUNS_ON:
         required: true
         type: string
 jobs:
   cd-to-demo-dev:
-    runs-on: ${{ inputs.environment-runs-on }}
+    runs-on: ${{ inputs.ENVIRONMENT_RUNS_ON }}
     steps:
       - name: cd
         run: |
-              echo "${{ inputs.environment-runs-on }}"
+              echo "${{ inputs.ENVIRONMENT_RUNS_ON }}"
