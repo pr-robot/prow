@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: cd
         run: |
-              echo ${{ inputs.enviroment }}
+              echo "${{ inputs.enviroment }}"
 
               # install helm binary
               curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
