@@ -6,18 +6,14 @@ on:
       enviroment:
         required: true
         type: string
-
-env:
-  ENVIROMENT: "ubuntu-latest"
-
 jobs:
   cd-to-demo-dev:
-    # runs-on: ${{ inputs.enviroment }}
-    runs-on: ${{ env.ENVIROMENT }}
+    runs-on: ubuntu-latest
     steps:
       - name: cd
         run: |
               echo ${{ inputs.enviroment }}
+
               # install helm binary
               curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
               chmod 700 get_helm.sh
