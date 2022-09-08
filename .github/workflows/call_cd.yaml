@@ -3,7 +3,7 @@ name: cd
 on:
   workflow_call:
     inputs:
-      testenv:
+      enviroment:
         required: true
         type: string
 jobs:
