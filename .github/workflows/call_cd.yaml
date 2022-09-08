@@ -3,12 +3,12 @@ name: cd
 on:
   workflow_call:
     inputs:
-      spray_ref:
+      environment:
         required: true
         type: string
 jobs:
   cd-to-demo-dev:
-    runs-on: ${{ inputs.spray_ref }}
+    runs-on: ${{ inputs.environment }}
     steps:
       - name: cd
         run: |
