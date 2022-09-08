@@ -8,19 +8,8 @@ on:
         type: string
 jobs:
   cd-to-demo-dev:
-    runs-on: ${{ inputs.enviroment }}
+    runs-on: ubuntu-latest
     steps:
       - name: cd
         run: |
               echo "${{ inputs.enviroment }}"
-
-              # install helm binary
-              curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-              chmod 700 get_helm.sh
-              ./get_helm.sh
-
-              # helm install
-              echo "${{secrets.DEV_KUBECONFIG}}" > kubeconfig
-              chmod o-r kubeconfig
-              chmod g-r kubeconfig
-              helm list -A --kubeconfig kubeconfig
