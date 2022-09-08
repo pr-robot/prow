@@ -1,10 +1,14 @@
 name: cd
 
-on: workflow_call
-
+on:
+  workflow_call:
+    inputs:
+      spray_ref:
+        required: true
+        type: string
 jobs:
   cd-to-demo-dev:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.spray_ref }}
     steps:
       - name: cd
         run: |
