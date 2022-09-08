@@ -5,7 +5,7 @@ on:
     branches:
       - main
 env:
-  ENVIROMENT: ubuntu-latest
+  ENVIROMENT: "ubuntu-latest"
 
 # env:
 #   KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
