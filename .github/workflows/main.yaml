@@ -14,14 +14,30 @@ env:
 #   ONLINE_REGISTER: ghcr.io
 
 jobs:
-  cd:
+  unit-test:
+    runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
-    uses: ./.github/workflows/call_cd.yaml
-    secrets: inherit
-    with:
-      environment: ${{ env.HELLO_WORLD }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.18.2
+
+      - name: unit test
+        run: |
+            echo ${{ env.HELLO_WORLD }}
+  #
+  # cd:
+  #   uses: ./.github/workflows/call_cd.yaml
+  #   secrets: inherit
+  #   with:
+  #     environment: ${{ env.HELLO_WORLD }}
 
 
 #            echo $GITHUB_REPOSITORY
