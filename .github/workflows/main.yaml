@@ -24,8 +24,7 @@ jobs:
         id: get-enviroment-runs-on
         run: |
           echo "${{ env.ENVIROMENT }}"
-          echo "${{ ENVIROMENT }}"
-          echo ::set-output name=enviroment::${{ env.ENVIROMENT }}
+          echo ::set-output name=enviroment::ubuntu-latest
 
   cd:
     uses: ./.github/workflows/call_cd.yaml
