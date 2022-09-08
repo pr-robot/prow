@@ -22,7 +22,9 @@ jobs:
     steps:
       - name: get-enviroment
         id: get-enviroment-runs-on
-        run: echo ::set-output name=enviroment::${{ env.ENVIROMENT }}
+        run: |
+          echo "${{ env.ENVIROMENT }}"
+          echo ::set-output name=enviroment::${{ env.ENVIROMENT }}
 
   cd:
     uses: ./.github/workflows/call_cd.yaml
