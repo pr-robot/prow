@@ -24,7 +24,7 @@ jobs:
         id: get-enviroment-runs-on
         run: echo ::set-output name=enviroment::${{ env.ENVIROMENT }}
 
-  name: cd
+  cd:
     uses: ./.github/workflows/call_cd.yaml
     secrets: inherit
     needs: get-enviroment
