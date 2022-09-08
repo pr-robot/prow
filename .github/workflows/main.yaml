@@ -5,7 +5,7 @@ on:
     branches:
       - main
 env:
-  ENVIROMENT: "ubuntu-latest"
+  ENVIROMENT_RUNS_ON: "ubuntu-latest"
 
 permissions:
   packages: write
@@ -17,24 +17,23 @@ permissions:
 #   ONLINE_REGISTER: ghcr.io
 
 jobs:
-  get-enviroment:
+  get-enviroment-runs-on:
     runs-on: ubuntu-latest
     outputs:
       enviroment: ${{ steps.get-enviroment-runs-on.outputs.enviroment }}
 
     steps:
-      - name: get The enviroment
-        id: get-enviroment-runs-on
+      - name: Get enviroment variable
+        id: enviroment-runs-on
         run: |
-          echo "${{ env.ENVIROMENT }}"
-          echo ::set-output name=enviroment::ubuntu-latest
+          echo ::set-output name=enviroment::${{ env.ENVIROMENT_RUNS_ON }}
 
   cd:
     uses: ./.github/workflows/call_cd.yaml
     secrets: inherit
-    needs: get-enviroment
+    needs: get-enviroment-runs-on
     with:
-      enviroment: ${{ needs.get-enviroment.outputs.enviroment }}
+      enviroment: ${{ needs.get-enviroment-runs-on.outputs.enviroment }}
 
 
 #            echo $GITHUB_REPOSITORY
