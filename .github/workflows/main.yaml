@@ -20,10 +20,10 @@ jobs:
   get-enviroment:
     runs-on: ubuntu-latest
     outputs:
-      enviroment: ${{ steps.get-enviroment.outputs.get-enviroment-runs-on }}
+      enviroment: ${{ steps.get-enviroment-runs-on.outputs.enviroment }}
 
     steps:
-      - name: get-enviroment
+      - name: get The enviroment
         id: get-enviroment-runs-on
         run: |
           echo "${{ env.ENVIROMENT }}"
