@@ -14,10 +14,10 @@ env:
 #   ONLINE_REGISTER: ghcr.io
 
 jobs:
-  get_ref:
+  get-enviroment:
     runs-on: ubuntu-latest
     outputs:
-      enviroment: ${{ steps.get_ref.outputs.get-enviroment-runs-on }}
+      enviroment: ${{ steps.get-enviroment.outputs.get-enviroment-runs-on }}
 
     steps:
       - name: get-enviroment
