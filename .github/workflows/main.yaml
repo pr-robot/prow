@@ -17,7 +17,7 @@ permissions:
 #   ONLINE_REGISTER: ghcr.io
 
 jobs:
-  job-get-environment:
+  get-environment:
     runs-on: ubuntu-latest
     outputs:
       environment: ${{ steps.id_environment.outputs.environment }}
@@ -31,9 +31,9 @@ jobs:
   cd:
     uses: ./.github/workflows/call_cd.yaml
     secrets: inherit
-    needs: job-get-environment
+    needs: get-environment
     with:
-      environment-runs-on: ${{ needs.job-get-environment.outputs.environment }}
+      environment-runs-on: ${{ needs.get-environment.outputs.environment }}
 
 
 #            echo $GITHUB_REPOSITORY
