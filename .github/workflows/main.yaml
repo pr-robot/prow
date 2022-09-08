@@ -18,7 +18,7 @@ jobs:
     uses: ./.github/workflows/call_cd.yaml
     secrets: inherit
     with:
-      testenv: ${{ env.HELLO_WORLD }}
+      testenv: ${{ HELLO_WORLD }}
 
 
 #            echo $GITHUB_REPOSITORY
