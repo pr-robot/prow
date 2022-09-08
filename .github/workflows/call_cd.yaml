@@ -8,7 +8,7 @@ on:
         type: string
 jobs:
   cd-to-demo-dev:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.enviroment }}
     steps:
       - name: cd
         run: |
