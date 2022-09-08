@@ -3,12 +3,12 @@ name: cd
 on:
   workflow_call:
     inputs:
-      environment:
+      testenv:
         required: true
         type: string
 jobs:
   cd-to-demo-dev:
-    runs-on: ${{ inputs.environment }}
+    runs-on: ${{ inputs.testenv }}
     steps:
       - name: cd
         run: |
