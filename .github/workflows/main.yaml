@@ -7,6 +7,9 @@ on:
 env:
   ENVIROMENT: "ubuntu-latest"
 
+permissions:
+  packages: write
+  contents: read
 # env:
 #   KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
 #   KUBESPRAY_IMAGE_NAME: kubespray
