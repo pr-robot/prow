@@ -19,7 +19,7 @@ jobs:
     outputs:
       enviroment: ${{ steps.get-enviroment.outputs.get-enviroment-runs-on }}
 
-    steps:
+    steps: 
       - name: get-enviroment
         id: get-enviroment-runs-on
         run: echo ::set-output name=enviroment::${{ env.ENVIROMENT }}
