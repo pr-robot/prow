@@ -26,7 +26,8 @@ jobs:
       - name: Get environment variable
         id: id_environment
         run: |
-          echo "输出目标信息 $GITHUB_SERVER "
+          echo "输出目标信息 $GITHUB_SERVER    1"
+          echo "输出目标信息 $GITHUB_REPOSITORY 2"
           echo ::set-output name=environment::${{ env.ENVIRONMENT_RUNS_ON }}
 
   cd:
