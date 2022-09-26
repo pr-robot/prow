@@ -21,4 +21,4 @@ jobs:
         run: |
           echo "输出目标信息 $GITHUB_SERVER    1"
           echo "输出目标信息 $GITHUB_REPOSITORY    2"
-          echo "输出目标信息 $GITHUB_REF    3"
+          echo "输出目标信息 $github.event.inputs.ref    3"
