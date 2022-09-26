@@ -14,7 +14,22 @@ permissions:
   contents: read
 
 jobs:
+  get_ref:
+    runs-on: ubuntu-latest
+    outputs:
+      ref: ${{ steps.result.outputs.ref }}
+    steps:
+      - name: Get Ref
+        id: get_ref
+        run: |
+            echo ::set-output name=tag::${{ github.event.pull_request.head.sha }}
+
+      - name: Result Ref
+        id: result
+        run: |
+          echo ::set-output name=ref::${ref}
   get-environment:
+    needs: get_ref
     runs-on: ubuntu-latest
     steps:
       - name: Get environment variable
@@ -22,3 +37,11 @@ jobs:
           echo "输出目标信息 $GITHUB_SERVER    1"
           echo "输出目标信息 $GITHUB_REPOSITORY    2"
           echo "输出目标信息 ${{ github.event.pull_request.head.sha }}    3"
+          echo "输出目标信息 ${{ needs.get_ref.outputs.REF }}    4"
+
+  call-cd:
+    uses: ./.github/workflows/call_cd.yaml
+    secrets: inherit
+    needs: get-environment
+    with:
+      REF: ${{ needs.get_ref.outputs.REF }}
