@@ -10,6 +10,13 @@ jobs:
   cd-to-demo-dev:
     runs-on: ubuntu-latest
     steps:
-      - name: cd
+      - name: cd1
         run: |
-              echo "${{ inputs.REF }}"
+              cat README.md
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.REF }}
+      - name: cd2
+        run: |
+              cat README.md
