@@ -10,6 +10,9 @@ jobs:
   cd-to-demo-dev:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: cd1
         run: |
               cat README.md
