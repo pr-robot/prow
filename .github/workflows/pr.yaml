@@ -38,4 +38,4 @@ jobs:
     secrets: inherit
     needs: get-environment
     with:
-      REF: ${{ jobs.get_ref.get_ref.outputs.ref }}
+      REF: ${{ jobs.get_ref.outputs.ref }}
