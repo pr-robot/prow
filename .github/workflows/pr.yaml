@@ -22,7 +22,7 @@ jobs:
       - name: Get Ref
         id: get_ref
         run: |
-            echo ::set-output name=tag::${{ github.event.pull_request.head.sha }}
+            echo ::set-output name=ref::${{ github.event.pull_request.head.sha }}
 
       - name: Result Ref
         id: result
