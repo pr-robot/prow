@@ -17,7 +17,7 @@ jobs:
   get_ref:
     runs-on: ubuntu-latest
     outputs:
-      REF: ${{ steps.result.outputs.ref }}
+      ref: ${{ steps.result.outputs.ref }}
     steps:
       - name: Get Ref
         id: result
@@ -39,4 +39,4 @@ jobs:
     secrets: inherit
     needs: get-environment
     with:
-      REF: ${{ needs.get_ref.outputs.REF }}
+      REF: ${{ needs.get_ref.outputs.ref }}
