@@ -20,14 +20,9 @@ jobs:
       REF: ${{ steps.result.outputs.ref }}
     steps:
       - name: Get Ref
-        id: get_ref
-        run: |
-            echo ::set-output name=ref::${{ github.event.pull_request.head.sha }}
-
-      - name: Result Ref
         id: result
         run: |
-          echo ::set-output name=ref::${ref}
+          echo ::set-output name=ref::${{ github.event.pull_request.head.sha }}
   get-environment:
     needs: get_ref
     runs-on: ubuntu-latest
