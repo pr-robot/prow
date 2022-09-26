@@ -31,8 +31,7 @@ jobs:
         run: |
           echo "输出目标信息 $GITHUB_SERVER    1"
           echo "输出目标信息 $GITHUB_REPOSITORY    2"
-          echo "输出目标信息 ${{ github.event.pull_request.head.sha }}    3"
-          echo "输出目标信息 ${{ needs.get_ref.outputs.REF }}    4"
+          echo "输出目标信息 ${{ needs.get_ref.outputs.ref }}    4"
 
   call-cd:
     uses: ./.github/workflows/call_cd.yaml
