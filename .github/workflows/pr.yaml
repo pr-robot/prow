@@ -36,6 +36,6 @@ jobs:
   call-cd:
     uses: ./.github/workflows/call_cd.yaml
     secrets: inherit
-    needs: get-environment
+    needs: [get-environment,get_ref]
     with:
-      REF: ${{ jobs.get_ref.outputs.ref }}
+      REF: ${{ needs.get_ref.outputs.ref }}
