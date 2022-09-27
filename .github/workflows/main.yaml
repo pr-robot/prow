@@ -32,14 +32,7 @@ jobs:
           echo "输出目标信息 ${{ github.ref_name }}    4"
           echo ::set-output name=environment::${{ env.ENVIRONMENT_RUNS_ON }}
 
-  cd:
-    uses: ./.github/workflows/call_cd.yaml
-    secrets: inherit
-    needs: get-environment
-    with:
-      ENVIRONMENT_RUNS_ON: ${{ needs.get-environment.outputs.environment }}
-
-
+#
 #            echo $GITHUB_REPOSITORY
 #            echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
 #            echo "REPO: ${{ env.REPO }}"
