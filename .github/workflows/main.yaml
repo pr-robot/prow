@@ -29,7 +29,7 @@ jobs:
           echo "输出目标信息 $GITHUB_SERVER    1"
           echo "输出目标信息 $GITHUB_REPOSITORY    2"
           echo "输出目标信息 $GITHUB_REF    3"
-          
+          echo "输出目标信息 ${{ github.ref_name }}    4"
           echo ::set-output name=environment::${{ env.ENVIRONMENT_RUNS_ON }}
 
   cd:
