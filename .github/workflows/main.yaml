@@ -44,6 +44,7 @@ jobs:
   #         echo ::set-output name=environment::${{ env.ENVIRONMENT_RUNS_ON }}
 
   build1:
+    needs: get-environment
     runs-on: ubuntu-latest
     steps:
       # - name: Checkout
