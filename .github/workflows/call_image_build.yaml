@@ -28,4 +28,4 @@ jobs:
     uses: ./.github/workflows/call_kubespray.yaml
     secrets: inherit
     with:
-      ENVIRONMENT_RUNS_ON: ${{ ENVIRONMENT_RUNS_ON }}
+      ENVIRONMENT_RUNS_ON: ${ENVIRONMENT_RUNS_ON}
