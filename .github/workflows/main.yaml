@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  get-environment:
+  get-environment: # 让build4传递环境变量必要的操作！！！
     runs-on: ubuntu-latest
     outputs:
       test: ${{ steps.get_variables.outputs.test }}
@@ -33,6 +33,6 @@ jobs:
   build4:
     needs: [build1,get-environment]
     uses: ./.github/workflows/call-test1.yaml
-    secrets: inherit # 
+    secrets: inherit
     with:
-      TEST1: ${{ needs.get-environment.outputs.test }}
+      TEST1: ${{ needs.get-environment.outputs.test }} # 传递环境到同目录其他CI文件
