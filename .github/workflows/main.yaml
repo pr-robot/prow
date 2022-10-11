@@ -32,7 +32,21 @@ jobs:
   #         echo "输出目标信息 ${{ github.ref_name }}    4"
   #         echo ::set-output name=environment::${{ env.ENVIRONMENT_RUNS_ON }}
 
+  build1:
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Checkout
+      #   uses: actions/checkout@v2
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     files: README.md
+      - name: unit test
+        run: |
+          echo "main输出环境变量 ${ENVIRONMENT_RUNS_ON}"
+
   build4:
+    needs: build1
     uses: ./.github/workflows/call_image_build.yaml
     secrets: inherit
     with:
