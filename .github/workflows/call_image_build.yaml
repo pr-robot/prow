@@ -1,7 +1,7 @@
 name: image-build
 
-on: workflow_call
-  # workflow_call:
+on:
+  workflow_call:
     inputs:
       ENVIRONMENT_RUNS_ON:
         required: true
