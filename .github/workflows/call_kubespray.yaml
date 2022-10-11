@@ -4,7 +4,7 @@ on:
   workflow_call:
   # workflow_call:
     inputs:
-      ENVIRONMENT:
+      ENVIRONMENT_RUNS_ON:
         required: true
         type: string
   workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
           echo "Environment: $ENVIRONMENT"
-          echo "测试变量：${ENVIRONMENT}"
+          echo "测试变量：${ENVIRONMENT_RUNS_ON}"
         env:
           LEVEL: ${{ inputs.logLevel }}
           TAGS: ${{ inputs.tags }}

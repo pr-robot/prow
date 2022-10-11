@@ -3,7 +3,7 @@ name: image-build
 on:
   workflow_call:
     inputs:
-      ENVIRONMENT:
+      ENVIRONMENT_RUNS_ON:
         required: true
         type: string
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: cd1
         run: |
               echo "call_image_build输出环境变量 ${{ inputs.ENVIRONMENT }} "
-              echo "call_image_build输出环境变量 ${ENVIRONMENT} "
+              echo "call_image_build输出环境变量 ${ENVIRONMENT_RUNS_ON} "
   #     - uses: actions/checkout@v3
   #       with:
   #         fetch-depth: 0
