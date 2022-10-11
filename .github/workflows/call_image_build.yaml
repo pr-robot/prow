@@ -25,7 +25,7 @@ jobs:
   #       run: |
   #             cat README.md
   build2:
-  needs: cd-to-demo-dev
+    needs: cd-to-demo-dev
     uses: ./.github/workflows/call_kubespray.yaml
     secrets: inherit
     with:
