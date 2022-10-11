@@ -16,11 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       test: ${{ steps.get_variables.outputs.test }}
+      aaa: ${{ steps.get_variables.outputs.aaa }}
 
     steps:
       - name: Get environment variable
         id: get_variables
         run: |
+          AAA="测试变量"
+          echo ::set-output name=aaa::${AAA}
           echo ::set-output name=test::${{ env.TEST }}
   build1:
     needs: get-environment
@@ -36,3 +39,4 @@ jobs:
     secrets: inherit
     with:
       TEST1: ${{ needs.get-environment.outputs.test }} # 传递环境到同目录其他CI文件
+      AAA: ${{ needs.get-environment.outputs.aaa }}

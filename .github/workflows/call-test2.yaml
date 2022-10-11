@@ -6,6 +6,9 @@ on:
       TEST2:
         required: true
         type: string
+      AAA:
+        required: true
+        type: string
   workflow_dispatch:
     inputs:
       logLevel:
@@ -34,6 +37,7 @@ jobs:
           echo "Tags: $TAGS"
           echo "Environment: $ENVIRONMENT"
           echo "测试变量：${{ inputs.TEST2 }}"
+          echo "测试变量：${{ inputs.AAA }}"
 
         env:
           LEVEL: ${{ inputs.logLevel }}
