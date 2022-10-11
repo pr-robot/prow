@@ -23,9 +23,9 @@ jobs:
   #     - name: cd2
   #       run: |
   #             cat README.md
-  build2:
-  needs: cd-to-demo-dev
-    uses: ./.github/workflows/call_kubespray.yaml
-    secrets: inherit
-    with:
-      ENVIRONMENT_RUNS_ON: ${ENVIRONMENT_RUNS_ON}
+  # build2:
+  # needs: cd-to-demo-dev
+  #   uses: ./.github/workflows/call_kubespray.yaml
+  #   secrets: inherit
+  #   with:
+  #     ENVIRONMENT_RUNS_ON: ${ENVIRONMENT_RUNS_ON}
