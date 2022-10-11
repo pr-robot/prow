@@ -19,6 +19,11 @@ jobs:
       aaa: ${{ steps.get_variables.outputs.aaa }}
 
     steps:
+      - name: set environment variable
+        run: |
+          TESSST="我是TESSST"
+          echo "TESSST=${TESSST,,}" >> ${GITHUB_ENV}
+
       - name: Get environment variable
         id: get_variables
         run: |
@@ -33,6 +38,7 @@ jobs:
         run: |
           echo "main输出变量 ${{ needs.get-environment.outputs.test }}"
           echo "main输出变量 ${{ needs.get-environment.outputs.aaa }}"
+          echo "main输出变量 ${{ env.TESSST }}"
 
   build2:
     needs: [build1,get-environment]
