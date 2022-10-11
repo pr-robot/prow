@@ -1,4 +1,4 @@
-name: image-build
+name: call-test1
 
 on:
   workflow_call:

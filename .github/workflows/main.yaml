@@ -22,7 +22,7 @@ jobs:
       - name: Get environment variable
         id: get_variables
         run: |
-          AAA="测试变量"
+          AAA="我是变量内容"
           echo ::set-output name=aaa::${AAA}
           echo ::set-output name=test::${{ env.TEST }}
   build1:
@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "main输出变量 ${{ needs.get-environment.outputs.test }}"
 
-  build4:
+  build2:
     needs: [build1,get-environment]
     uses: ./.github/workflows/call-test1.yaml
     secrets: inherit

@@ -1,4 +1,4 @@
-name: cd
+name: call-test2
 
 on:
   workflow_call:
@@ -42,7 +42,7 @@ jobs:
           TAGS: ${{ inputs.tags }}
           ENVIRONMENT: ${{ inputs.environment }}
 
-  test:
+  build1:
     needs: log-the-inputs
     runs-on: ubuntu-latest
     steps:
