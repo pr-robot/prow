@@ -5,120 +5,34 @@ on:
     branches:
       - main
 env:
-  ENVIRONMENT_RUNS_ON: "ubuntu-latest"
+  TEST: "ubuntu-latest"
 
 permissions:
   packages: write
   contents: read
-# env:
-#   KUKEAN_OPERATOR_IMAGE_NAME: kubean-operator
-#   KUBESPRAY_IMAGE_NAME: kubespray
-#   SPRAY_JOB_IMAGE_NAME: spray-job
-#   ONLINE_REGISTER: ghcr.io
+
 jobs:
   get-environment:
     runs-on: ubuntu-latest
     outputs:
-      environment_runs_on: ${{ steps.get_variables.outputs.environment_runs_on }}
+      test: ${{ steps.get_variables.outputs.test }}
 
     steps:
       - name: Get environment variable
         id: get_variables
         run: |
-          echo ::set-output name=environment_runs_on::${{ env.ENVIRONMENT_RUNS_ON }}
-
-
-  # get-environment:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     environment: ${{ steps.id_environment.outputs.environment }}
-  #
-  #   steps:
-  #     - name: Get environment variable
-  #       id: id_environment
-  #       run: |
-  #         echo "输出目标信息 $GITHUB_SERVER    1"
-  #         echo "输出目标信息 $GITHUB_REPOSITORY    2"
-  #         echo "输出目标信息 $GITHUB_REF    3"
-  #         echo "输出目标信息 ${{ github.ref_name }}    4"
-  #         echo ::set-output name=environment::${{ env.ENVIRONMENT_RUNS_ON }}
-
+          echo ::set-output name=test::${{ env.TEST }}
   build1:
     needs: get-environment
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout
-      #   uses: actions/checkout@v2
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     files: README.md
       - name: unit test
         run: |
-
-          echo "main输出环境变量 ${ENVIRONMENT_RUNS_ON}"
+          echo "main输出变量 ${{ needs.get-environment.outputs.test }}"
 
   build4:
     needs: [build1,get-environment]
-    uses: ./.github/workflows/call_image_build.yaml
-    secrets: inherit
+    uses: ./.github/workflows/call-test1.yaml
+    secrets: inherit # 
     with:
-      ENVIRONMENT_RUNS_ON: ${{ needs.get-environment.outputs.environment_runs_on }}
-
-#
-#            echo $GITHUB_REPOSITORY
-#            echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
-#            echo "REPO: ${{ env.REPO }}"
-#            echo "${{ env.ONLINE_REGISTER }}/${{ env.REPO }}/kubespray:"
-#             #VERSION=$GITHUB_REF_NAME
-#             #echo $VERSION
-  #
-  # build2:
-  #   needs: build1
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # - name: Checkout
-  #     #   uses: actions/checkout@v2
-  #     # - name: Release
-  #     #   uses: softprops/action-gh-release@v1
-  #     #   with:
-  #     #     files: README.md
-  #     - name: unit test
-  #       run: |
-  #           # echo ${{ secrets.TEST }}
-  #           # echo 你们好哇 > test_${GITHUB_REF_NAME}_123.txt
-  #           #
-  #           # wget https://devtools.qiniu.com/qshell-v2.8.0-linux-amd64.tar.gz
-  #           # tar -zxvf qshell-v2.8.0-linux-amd64.tar.gz
-  #           # mv qshell /usr/local/bin/
-  #           # qshell account -w ${{ secrets.QINIU_AK }} ${{ secrets.QINIU_SK }} 'dce-ci'
-  #           # # delete the same name of old file
-  #           # qshell delete   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
-  #           # qshell rput   ${{ secrets.QINIU_BU }} DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt  ./test_${GITHUB_REF_NAME}_123.txt
-  #           # rm -rf test_${GITHUB_REF_NAME}_123.txt
-  #           # wget https://qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/test_${GITHUB_REF_NAME}_123.txt
-  #           # cat test_${GITHUB_REF_NAME}_123.txt
-  #           echo 12www3 > test_test_123.txt
-  #           ls
-  #
-  #     - name: Upload output file
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: output-log-file-${GITHUB_REF_NAME}
-  #         path: |
-  #             test_main_123.txt
-  #             test_test_123.txt
-  # build3:
-  #   needs: build2
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
-  #     - name: Download a single artifact
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: output-log-file-${GITHUB_REF_NAME}
-  #     - name: unit test
-  #       run: |
-  #             cat test_test_123.txt
+      TEST1: ${{ needs.get-environment.outputs.test }}

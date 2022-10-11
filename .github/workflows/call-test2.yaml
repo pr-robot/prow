@@ -2,9 +2,8 @@ name: cd
 
 on:
   workflow_call:
-  # workflow_call:
     inputs:
-      ENVIRONMENT_RUNS_ON:
+      TEST2:
         required: true
         type: string
   workflow_dispatch:
@@ -34,7 +33,7 @@ jobs:
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
           echo "Environment: $ENVIRONMENT"
-          echo "测试变量：${{ inputs.ENVIRONMENT_RUNS_ON }}"
+          echo "测试变量：${{ inputs.TEST2 }}"
 
         env:
           LEVEL: ${{ inputs.logLevel }}
