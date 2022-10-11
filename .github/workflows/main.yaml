@@ -46,12 +46,12 @@ jobs:
 
           echo "main输出环境变量 ${ENVIRONMENT_RUNS_ON}"
 
-  # build4:
-  #   needs: build1
-  #   uses: ./.github/workflows/call_image_build.yaml
-  #   secrets: inherit
-  #   with:
-  #     ENVIRONMENT_RUNS_ON: ${{ env.ENVIRONMENT_RUNS_ON }}
+  build4:
+    needs: build1
+    uses: ./.github/workflows/call_image_build.yaml
+    secrets: inherit
+    with:
+      ENVIRONMENT_RUNS_ON: ${ENVIRONMENT_RUNS_ON}
 
 #
 #            echo $GITHUB_REPOSITORY
