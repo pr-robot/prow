@@ -43,7 +43,7 @@ jobs:
           echo "main输出变量 ${{ needs.get-environment.outputs.test }}"
           echo "main输出变量 ${{ needs.get-environment.outputs.aaa }}"
 
-          echo "main输出变量 ${{ needs.get-environment.outputs.tessst }}"
+          echo "main输出变量  ${{ needs.get-environment.outputs.tessst }}"
 
   build2:
     needs: [build1,get-environment]
