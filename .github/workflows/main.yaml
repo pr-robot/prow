@@ -32,7 +32,7 @@ jobs:
           echo ::set-output name=aaa::${AAA}
           echo ::set-output name=test::${{ env.TEST }}
 
-          echo ::set-output name=tesst::${{ env.TESSST }}
+          echo ::set-output name=tessst::${{ env.TESSST }}
 
   build1:
     needs: get-environment
