@@ -15,10 +15,9 @@ permissions:
 #   KUBESPRAY_IMAGE_NAME: kubespray
 #   SPRAY_JOB_IMAGE_NAME: spray-job
 #   ONLINE_REGISTER: ghcr.io
-
+jobs:
   get-environment:
     runs-on: ubuntu-latest
-    needs: sync-charts-and-api
     outputs:
       environment_runs_on: ${{ steps.get_variables.outputs.environment_runs_on }}
 
@@ -28,7 +27,7 @@ permissions:
         run: |
           echo ::set-output name=environment_runs_on::${{ env.ENVIRONMENT_RUNS_ON }}
 
-jobs:
+
   # get-environment:
   #   runs-on: ubuntu-latest
   #   outputs:
