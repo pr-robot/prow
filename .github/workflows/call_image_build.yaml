@@ -1,0 +1,29 @@
+name: image-build
+
+on: workflow_call
+  # workflow_call:
+    # inputs:
+    #   REF:
+    #     required: true
+    #     type: string
+jobs:
+  # cd-to-demo-dev:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     - name: cd1
+  #       run: |
+  #             cat README.md
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #         ref: ${{ inputs.REF }}
+  #     - name: cd2
+  #       run: |
+  #             cat README.md
+  build2:
+  # needs: cd-to-demo-dev
+    uses: ./.github/workflows/call_kubespray.yaml
+    secrets: inherit

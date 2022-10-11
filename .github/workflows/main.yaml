@@ -17,20 +17,25 @@ permissions:
 #   ONLINE_REGISTER: ghcr.io
 
 jobs:
-  get-environment:
-    runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ steps.id_environment.outputs.environment }}
+  # get-environment:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     environment: ${{ steps.id_environment.outputs.environment }}
+  #
+  #   steps:
+  #     - name: Get environment variable
+  #       id: id_environment
+  #       run: |
+  #         echo "输出目标信息 $GITHUB_SERVER    1"
+  #         echo "输出目标信息 $GITHUB_REPOSITORY    2"
+  #         echo "输出目标信息 $GITHUB_REF    3"
+  #         echo "输出目标信息 ${{ github.ref_name }}    4"
+  #         echo ::set-output name=environment::${{ env.ENVIRONMENT_RUNS_ON }}
 
-    steps:
-      - name: Get environment variable
-        id: id_environment
-        run: |
-          echo "输出目标信息 $GITHUB_SERVER    1"
-          echo "输出目标信息 $GITHUB_REPOSITORY    2"
-          echo "输出目标信息 $GITHUB_REF    3"
-          echo "输出目标信息 ${{ github.ref_name }}    4"
-          echo ::set-output name=environment::${{ env.ENVIRONMENT_RUNS_ON }}
+  build4:
+    uses: ./.github/workflows/call_image_build.yaml
+    secrets: inherit
+
 
 #
 #            echo $GITHUB_REPOSITORY
@@ -89,8 +94,3 @@ jobs:
   #     - name: unit test
   #       run: |
   #             cat test_test_123.txt
-
-#   build4:
-#     needs: build1
-#     uses: ./.github/workflows/call_binary.yaml
-#     secrets: inherit
