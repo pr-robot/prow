@@ -59,7 +59,7 @@ jobs:
           echo "main输出环境变量 ${ENVIRONMENT_RUNS_ON}"
 
   build4:
-    needs: build1
+    needs: [build1,get-environment]
     uses: ./.github/workflows/call_image_build.yaml
     secrets: inherit
     with:
