@@ -36,7 +36,7 @@ jobs:
     uses: ./.github/workflows/call_image_build.yaml
     secrets: inherit
     with:
-      ENVIRONMENT_RUNS_ON: ${ENVIRONMENT_RUNS_ON}
+      ENVIRONMENT_RUNS_ON: ${ENVIRONMENT_RUNS_ ON}
 
 #
 #            echo $GITHUB_REPOSITORY
