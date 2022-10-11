@@ -16,7 +16,7 @@ jobs:
       - name: cd1
         run: |
               echo "call_image_build输出环境变量 ${{ inputs.ENVIRONMENT }} "
-              echo "call_image_build输出环境变量 ${ENVIRONMENT} "s
+              echo "call_image_build输出环境变量 ${ENVIRONMENT} "
   #     - uses: actions/checkout@v3
   #       with:
   #         fetch-depth: 0
