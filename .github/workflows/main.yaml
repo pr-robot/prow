@@ -17,12 +17,13 @@ jobs:
     outputs:
       test: ${{ steps.get_variables.outputs.test }}
       aaa: ${{ steps.get_variables.outputs.aaa }}
+      tessst: ${{ steps.get_variables.outputs.tessst }}
 
     steps:
       - name: set environment variable
         run: |
           TESSST="我是TESSST"
-          echo "TESSST=${TESSST,,}" >> ${GITHUB_ENV}
+          echo "TESSST=${TESSST,,}" >> ${GITHUB_ENV} # 由于每个job的文件系统都是独立的，本job产生的env没法被其他job使用
 
       - name: Get environment variable
         id: get_variables
@@ -30,6 +31,9 @@ jobs:
           AAA="我是变量内容"
           echo ::set-output name=aaa::${AAA}
           echo ::set-output name=test::${{ env.TEST }}
+
+          echo ::set-output name=tesst::${{ env.TESSST }}
+
   build1:
     needs: get-environment
     runs-on: ubuntu-latest
@@ -38,7 +42,8 @@ jobs:
         run: |
           echo "main输出变量 ${{ needs.get-environment.outputs.test }}"
           echo "main输出变量 ${{ needs.get-environment.outputs.aaa }}"
-          echo "main输出变量 ${{ env.TESSST }}"
+
+          echo "main输出变量 ${{ needs.get-environment.outputs.tessst }}"
 
   build2:
     needs: [build1,get-environment]
