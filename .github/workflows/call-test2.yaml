@@ -36,10 +36,16 @@ jobs:
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
           echo "Environment: $ENVIRONMENT"
-          echo "测试变量：${{ inputs.TEST2 }}"
-          echo "测试变量：${{ inputs.AAA }}"
 
         env:
           LEVEL: ${{ inputs.logLevel }}
           TAGS: ${{ inputs.tags }}
           ENVIRONMENT: ${{ inputs.environment }}
+
+  test:
+    needs: log-the-inputs
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "测试变量：${{ inputs.TEST2 }}"
+          echo "测试变量：${{ inputs.AAA }}"
