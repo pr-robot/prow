@@ -15,9 +15,9 @@ jobs:
   get-environment: # 让build4传递环境变量必要的操作！！！
     runs-on: ubuntu-latest
     outputs:
-      test: ${{ steps.get_variables.outputs.test }}
-      aaa: ${{ steps.get_variables.outputs.aaa }}
-      tessst: ${{ steps.get_variables.outputs.tessst }}
+      test: ${{ steps.output_variables.outputs.test }}
+      aaa: ${{ steps.output_variables.outputs.aaa }}
+      tessst: ${{ steps.output_variables.outputs.tessst }}
 
     steps:
       - name: set environment variable
@@ -25,8 +25,8 @@ jobs:
           TESSST="我是TESSST"
           echo "TESSST=${TESSST,,}" >> ${GITHUB_ENV} # 由于每个job的文件系统都是独立的，本job产生的env没法被其他job使用
 
-      - name: Get environment variable
-        id: get_variables
+      - name: output environment variable
+        id: output_variables
         run: |
           AAA="我是变量内容"
           echo ::set-output name=aaa::${AAA}
