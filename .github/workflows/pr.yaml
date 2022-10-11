@@ -6,6 +6,7 @@ on:
       - opened
       - synchronize
       - reopened
+
 env:
   ENVIRONMENT_RUNS_ON: "ubuntu-latest"
 
@@ -34,8 +35,9 @@ jobs:
           echo "输出目标信息 ${{ needs.get_ref.outputs.ref }}    4"
 
   call-cd:
-    uses: ./.github/workflows/call_cd.yaml
+    uses: ./.github/workflows/call_image_build.yaml
     secrets: inherit
     needs: [get-environment,get_ref]
     with:
       REF: ${{ needs.get_ref.outputs.ref }}
+      ENVIRONMENT_RUNS_ON: ${{ ENVIRONMENT_RUNS_ON }}

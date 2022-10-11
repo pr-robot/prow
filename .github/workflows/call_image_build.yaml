@@ -2,10 +2,10 @@ name: image-build
 
 on: workflow_call
   # workflow_call:
-    # inputs:
-    #   REF:
-    #     required: true
-    #     type: string
+    inputs:
+      ENVIRONMENT_RUNS_ON:
+        required: true
+        type: string
 jobs:
   # cd-to-demo-dev:
   #   runs-on: ubuntu-latest
@@ -27,3 +27,5 @@ jobs:
   # needs: cd-to-demo-dev
     uses: ./.github/workflows/call_kubespray.yaml
     secrets: inherit
+    with:
+      ENVIRONMENT_RUNS_ON: ${{ ENVIRONMENT_RUNS_ON }}
