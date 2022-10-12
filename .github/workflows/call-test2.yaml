@@ -36,6 +36,8 @@ jobs:
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
           echo "Environment: $ENVIRONMENT"
+          ASDF=${{ inputs.environment }}
+          echo ASDF
 
         env:
           LEVEL: ${{ inputs.logLevel }}
