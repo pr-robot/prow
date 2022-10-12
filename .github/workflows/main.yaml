@@ -20,6 +20,11 @@ jobs:
       tessst: ${{ steps.output_variables.outputs.tessst }}
 
     steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: kubernetes-sigs/kubespray
+          ref: 3b99d24
+          
       - name: set environment variable
         run: |
           TESSST="我是TESSST"
