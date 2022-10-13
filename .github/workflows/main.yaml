@@ -33,6 +33,12 @@ jobs:
       - name: output environment variable
         id: output_variables
         run: |
+          export REGISTRY=ghcr.io
+          export REPO=kubean-io
+          export IMAGE_TAG=latest
+          export SPRAY_IMAGE_TAG_SHORT_SHA=latest
+          make security-scanning
+
           wget https://github.com/aquasecurity/trivy/releases/download/v0.29.0/trivy_0.29.0_Linux-64bit.tar.gz
           tar xf trivy_0.29.0_Linux-64bit.tar.gz
           mv trivy /usr/local/bin/trivy
