@@ -33,6 +33,9 @@ jobs:
       - name: output environment variable
         id: output_variables
         run: |
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.29.0/trivy_0.29.0_Linux-64bit.tar.gz
+          tar xf trivy_0.29.0_Linux-64bit.tar.gz
+          mv trivy /usr/local/bin/trivy
           trivy -v
           AAA="我是变量内容"
           echo ::set-output name=aaa::${AAA}
