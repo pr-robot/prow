@@ -39,6 +39,7 @@ jobs:
           trivy -v
           AAA="我是变量内容"
           echo "{AAA}={我是变量内容}" >> ${GITHUB_ENV}
+          echo "===============输出变量内容：${{ env.AAA }}"
           echo ::set-output name=aaa::${AAA}
           echo ::set-output name=test::${{ env.TEST }}
 
@@ -52,7 +53,7 @@ jobs:
         run: |
           echo "main输出变量 ${{ needs.output-variable.outputs.test }}"
           echo "main输出变量 ${{ needs.output-variable.outputs.aaa }}"
-
+          echo "===============输出变量内容：${{ env.AAA }}"
           echo "main输出变量  ${{ needs.output-variable.outputs.tessst }}"
 
   build2:
