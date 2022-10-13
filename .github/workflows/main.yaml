@@ -37,8 +37,7 @@ jobs:
           tar xf trivy_0.29.0_Linux-64bit.tar.gz
           mv trivy /usr/local/bin/trivy
           trivy -v
-          AAA="我是变量内容"
-          echo "{AAA}={我是变量内容}" >> ${GITHUB_ENV}
+          echo "AAA=我是变量内容" >> ${GITHUB_ENV}
           echo "===============输出变量内容：${{ env.AAA }}"
           echo ::set-output name=aaa::${AAA}
           echo ::set-output name=test::${{ env.TEST }}
