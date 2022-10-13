@@ -22,8 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: kubernetes-sigs/kubespray
-          ref: 3646dc0bd21d15025bf299270320eb50e7a3eec3
+          fetch-depth: 0
 
       - name: set environment variable
         run: |
