@@ -24,7 +24,7 @@ jobs:
         with:
           repository: kubernetes-sigs/kubespray
           ref: 3646dc0bd21d15025bf299270320eb50e7a3eec3
-          
+
       - name: set environment variable
         run: |
           TESSST="我是TESSST"
@@ -33,6 +33,7 @@ jobs:
       - name: output environment variable
         id: output_variables
         run: |
+          trivy -v
           AAA="我是变量内容"
           echo ::set-output name=aaa::${AAA}
           echo ::set-output name=test::${{ env.TEST }}
