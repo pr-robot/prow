@@ -19,6 +19,8 @@ jobs:
       - name: cd1
         run: |
               echo "输出环境变量 ${{ inputs.TEST1 }} "
+              echo "${{ inputs.TEST1 }} "
+              echo $(echo ${{ inputs.SPRAY_REF }} | cut -c 1-7)
               echo "输出环境变量 ${{ inputs.AAA }} "
               ASDF=${{ inputs.AAA }}
               echo $ASDF
