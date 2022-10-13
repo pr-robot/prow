@@ -38,6 +38,7 @@ jobs:
           mv trivy /usr/local/bin/trivy
           trivy -v
           AAA="我是变量内容"
+          echo "{AAA}={我是变量内容}" >> ${GITHUB_ENV}
           echo ::set-output name=aaa::${AAA}
           echo ::set-output name=test::${{ env.TEST }}
 
