@@ -27,6 +27,7 @@ jobs:
       - name: set environment variable
         run: |
           TESSST="我是TESSST"
+          export TEST2="我是test2"
           echo "TESSST=${TESSST,,}" >> ${GITHUB_ENV} # 由于每个job的文件系统都是独立的，本job产生的env没法被其他job使用
 
       - name: output environment variable
@@ -34,6 +35,7 @@ jobs:
         run: |
           echo $TESSST
           echo ${{ env.TESSST }}
+          echo $TEST2
           # export REGISTRY=ghcr.io
           # export REPO=kubean-io
           # export IMAGE_TAG=latest
