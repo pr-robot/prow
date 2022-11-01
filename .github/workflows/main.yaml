@@ -32,6 +32,8 @@ jobs:
       - name: output environment variable
         id: output_variables
         run: |
+          echo $TESSST
+          echo ${{ env.TESSST }}
           # export REGISTRY=ghcr.io
           # export REPO=kubean-io
           # export IMAGE_TAG=latest
@@ -48,7 +50,9 @@ jobs:
           # echo ::set-output name=test::${{ env.TEST }}
 
           # echo ::set-output name=tessst::${{ env.TESSST }}
-          AAA="我是变量"
+          # AAA="我是变量"
+
+
           echo "test=${AAA}" >> $GITHUB_OUTPUT
 
   build1:
