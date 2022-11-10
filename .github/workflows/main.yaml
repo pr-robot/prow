@@ -91,8 +91,20 @@ jobs:
             curl \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest
-
+              https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${GITHUB_REF_NAME}.md
+      - name: Pushes charts to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          source-directory: ./
+          destination-github-username: ${{ github.repository_owner }}
+          destination-repository-name: 'kubean-helm-chart'
+          user-email: prow-robot@prow.io
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-directory: ./
+          target-branch: release-notes
 #     steps:
 #       - uses: actions/checkout@v3
 #         with:
