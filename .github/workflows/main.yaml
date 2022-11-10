@@ -59,24 +59,41 @@
 #           generate_release_notes: true
 name: Main
 
-on:
-  push:
-    tags:
-      - "v*.*.*"
+on: push
+# on:
+#   push:
+#     tags:
+#       - "v*.*.*"
 
 jobs:
-  build:
+  # release:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Release
+  #       if: startsWith(github.ref, 'refs/tags/')
+  #       uses: softprops/action-gh-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         generate_release_notes: true
+  save-releasenotes:
+    # needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          generate_release_notes: true
+        - uses: actions/checkout@v3
+          with:
+            ref: 'release-notes'
+      - name: test variable
+        run: |
+            curl \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              https://api.github.com/repos/OWNER/REPO/releases/latest
+
 #     steps:
 #       - uses: actions/checkout@v3
 #         with:
