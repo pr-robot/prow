@@ -59,27 +59,26 @@
 #           generate_release_notes: true
 name: Main
 
-on: push
-# on:
-#   push:
-#     tags:
-#       - "v*.*.*"
+on:
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
-  # release:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Release
-  #       if: startsWith(github.ref, 'refs/tags/')
-  #       uses: softprops/action-gh-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         generate_release_notes: true
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          generate_release_notes: true
+
   save-releasenotes:
-    # needs: release
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
