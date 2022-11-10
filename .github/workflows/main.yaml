@@ -20,15 +20,14 @@ jobs:
       - name: Generate Changelog
         run: echo "# Good things have arrived" > ${{ github.workspace }}-CHANGELOG.txt
       - name: Release
-        uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           generate_release_notes: true
           files: |
             ${{ github.workspace }}-CHANGELOG.txt
-
 #   output-variable: # 让build4传递环境变量必要的操作！！！
 #     runs-on: ubuntu-latest
 #     outputs:
