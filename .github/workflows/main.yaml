@@ -88,6 +88,7 @@ jobs:
           ref: 'release-notes'
       - name: test variable
         run: |
+            mkdir -p
             curl \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
@@ -98,12 +99,11 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: ./
+          source-directory: .
           destination-github-username: ${{ github.repository_owner }}
           destination-repository-name: 'prow'
           user-email: prow-robot@prow.io
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
-          target-directory: ./
           target-branch: release-notes
 #     steps:
 #       - uses: actions/checkout@v3
