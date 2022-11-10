@@ -91,7 +91,7 @@ jobs:
             curl \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              https://api.github.com/repos/OWNER/REPO/releases/latest
+              https://api.github.com/repos/${GITHUB_ACTION_REPOSITORY}/releases/latest
 
 #     steps:
 #       - uses: actions/checkout@v3
