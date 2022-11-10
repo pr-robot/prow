@@ -79,13 +79,13 @@ jobs:
   #       with:
   #         generate_release_notes: true
   save-releasenotes:
+    # needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        - uses: actions/checkout@v3
-          with:
-            ref: 'release-notes'
+        with:
+          ref: 'release-notes'
       - name: test variable
         run: |
             curl \
