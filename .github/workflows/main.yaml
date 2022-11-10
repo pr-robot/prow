@@ -100,7 +100,7 @@ jobs:
         with:
           source-directory: ./
           destination-github-username: ${{ github.repository_owner }}
-          destination-repository-name: 'kubean-helm-chart'
+          destination-repository-name: 'prow'
           user-email: prow-robot@prow.io
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
           target-directory: ./
