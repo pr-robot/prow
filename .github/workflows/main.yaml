@@ -12,63 +12,76 @@ permissions:
   contents: read
 
 jobs:
-  output-variable: # 让build4传递环境变量必要的操作！！！
-    runs-on: ubuntu-latest
-    outputs:
-      test: ${{ steps.output_variables.outputs.test }}
-      # aaa: ${{ steps.output_variables.outputs.aaa }}
-      # tessst: ${{ steps.output_variables.outputs.tessst }}
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: set environment variable
-        run: |
-          AAAAAAA="我是A"
-          export BBBBBBB="我是B"
-          echo "CCCCCCC=${AAAAAAA,,}" >> ${GITHUB_ENV} # 由于每个job的文件系统都是独立的，本job产生的env没法被其他job使用
-      - name: output environment variable
-        id: output_variables
-        run: |
-          echo $AAAAAAA
-          echo $BBBBBBB
-          echo ${{ env.CCCCCCC }}
-
-          # export REGISTRY=ghcr.io
-          # export REPO=kubean-io
-          # export IMAGE_TAG=latest
-          # export SPRAY_IMAGE_TAG_SHORT_SHA=latest
-          # make security-scanning
-          #
-          # wget https://github.com/aquasecurity/trivy/releases/download/v0.29.0/trivy_0.29.0_Linux-64bit.tar.gz
-          # tar xf trivy_0.29.0_Linux-64bit.tar.gz
-          # mv trivy /usr/local/bin/trivy
-          # trivy -v
-          # echo "AAA=我是变量内容" >> ${GITHUB_ENV}
-          # echo "===============输出变量内容：${{ env.AAA }}"
-          # echo ::set-output name=aaa::${AAA}
-          # echo ::set-output name=test::${{ env.TEST }}
-
-          # echo ::set-output name=tessst::${{ env.TESSST }}
-          # AAA="我是变量"
-
-
-          echo "test=${AAA}" >> $GITHUB_OUTPUT
-
   build1:
-    needs: output-variable
     runs-on: ubuntu-latest
     steps:
-      - name: test variable
-        run: |
-          echo "main输出变量 ${{ needs.output-variable.outputs.test }}"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Generate Changelog
+        run: echo "# Good things have arrived" > ${{ github.workspace }}-CHANGELOG.txt
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
 
-  build2:
-    needs: [build1,output-variable]
-    uses: ./.github/workflows/call-test1.yaml
-    secrets: inherit
-    with:
-      TEST1: ${{ needs.output-variable.outputs.test }} # 传递环境到同目录其他CI文件
-      AAA: ${{ needs.output-variable.outputs.aaa }}
+
+#   output-variable: # 让build4传递环境变量必要的操作！！！
+#     runs-on: ubuntu-latest
+#     outputs:
+#       test: ${{ steps.output_variables.outputs.test }}
+#       # aaa: ${{ steps.output_variables.outputs.aaa }}
+#       # tessst: ${{ steps.output_variables.outputs.tessst }}
+
+#     steps:
+#       - uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+
+#       - name: set environment variable
+#         run: |
+#           AAAAAAA="我是A"
+#           export BBBBBBB="我是B"
+#           echo "CCCCCCC=${AAAAAAA,,}" >> ${GITHUB_ENV} # 由于每个job的文件系统都是独立的，本job产生的env没法被其他job使用
+#       - name: output environment variable
+#         id: output_variables
+#         run: |
+#           echo $AAAAAAA
+#           echo $BBBBBBB
+#           echo ${{ env.CCCCCCC }}
+
+#           # export REGISTRY=ghcr.io
+#           # export REPO=kubean-io
+#           # export IMAGE_TAG=latest
+#           # export SPRAY_IMAGE_TAG_SHORT_SHA=latest
+#           # make security-scanning
+#           #
+#           # wget https://github.com/aquasecurity/trivy/releases/download/v0.29.0/trivy_0.29.0_Linux-64bit.tar.gz
+#           # tar xf trivy_0.29.0_Linux-64bit.tar.gz
+#           # mv trivy /usr/local/bin/trivy
+#           # trivy -v
+#           # echo "AAA=我是变量内容" >> ${GITHUB_ENV}
+#           # echo "===============输出变量内容：${{ env.AAA }}"
+#           # echo ::set-output name=aaa::${AAA}
+#           # echo ::set-output name=test::${{ env.TEST }}
+
+#           # echo ::set-output name=tessst::${{ env.TESSST }}
+#           # AAA="我是变量"
+
+
+#           echo "test=${AAA}" >> $GITHUB_OUTPUT
+
+#   build1:
+#     needs: output-variable
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: test variable
+#         run: |
+#           echo "main输出变量 ${{ needs.output-variable.outputs.test }}"
+
+#   build2:
+#     needs: [build1,output-variable]
+#     uses: ./.github/workflows/call-test1.yaml
+#     secrets: inherit
+#     with:
+#       TEST1: ${{ needs.output-variable.outputs.test }} # 传递环境到同目录其他CI文件
+#       AAA: ${{ needs.output-variable.outputs.aaa }}
