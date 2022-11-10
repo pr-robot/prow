@@ -79,7 +79,6 @@ jobs:
   #       with:
   #         generate_release_notes: true
   save-releasenotes:
-    # needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
