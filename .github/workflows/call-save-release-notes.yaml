@@ -3,7 +3,6 @@ name: image build kubespray
 on: [workflow_call,workflow_dispatch]
 jobs:
   save-releasenotes:
-    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
