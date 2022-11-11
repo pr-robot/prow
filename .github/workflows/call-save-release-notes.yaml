@@ -19,7 +19,6 @@ jobs:
 
       - name: web-site
         run: |
-            gem install jekyll bundler
             jekyll new myblog
             mv myblog/* ./
 
