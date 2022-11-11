@@ -19,6 +19,8 @@ jobs:
 
       - name: web-site
         run: |
+            sudo apt-get install ruby-full build-essential zlib1g-dev
+            gem install jekyll bundler
             jekyll new myblog
             mv myblog/* ./
 
