@@ -17,8 +17,8 @@ jobs:
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${latest_release}.md
 
+      - uses: helaili/jekyll-action@2.0.1
       - name: web-site
-        uses: helaili/jekyll-action@2.0.1
         run: |
             jekyll new myblog
             mv myblog/* ./
