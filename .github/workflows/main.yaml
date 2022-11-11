@@ -65,7 +65,7 @@ on:
       - "v*.*.*"
 
 jobs:
-  auto_generate_release_notes:
+  auto-generate-release-notes:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -77,8 +77,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
 
-  save_release_notes_to_file:
-    needs: auto_generate_release_notes
+  save-release-notes-to-file:
+    needs: auto-generate-release-notes
     uses: ./.github/workflows/call-save-release-notes.yaml
     secrets: inherit
 #     steps:

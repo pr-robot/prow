@@ -2,7 +2,7 @@ name: save release notes
 
 on: [workflow_call,workflow_dispatch]
 jobs:
-  save_release_notes_to_file:
+  save-release-notes-to-file:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,11 +20,11 @@ jobs:
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
         env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          SSH_DEPLOY_KEY: ${{ secrets.SELF_SSH_DEPLOY_KEY }}
         with:
           source-directory: .
           destination-github-username: ${{ github.repository_owner }}
-          destination-repository-name: 'prow'
-          user-email: prow-robot@prow.io
+          destination-repository-name: 'kubean'
+          user-email: kubean-io-robot@kubean-io
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
           target-branch: release-notes
