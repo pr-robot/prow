@@ -19,8 +19,9 @@ jobs:
               mkdir -p docs/honkit/{en,zh}/07Changelog
               cp -rp ${latest_release}.md docs/honkit/en/07Changelog/
               cp -rp ${latest_release}.md docs/honkit/zh/07Changelog/
-              sed -i "/- Changelog:/a\ \ - ${latest_release}: 07Changelog/${latest_release}.md" pages.yml
-
+              sed -i "/- Changelog:/a\ \ - ${latest_release}: 07Changelog/${latest_release}.md" docs/honkit/en/pages.yml
+              sed -i "/- Changelog:/a\ \ - ${latest_release}: 07Changelog/${latest_release}.md" docs/honkit/zh/pages.yml
+              
       # - uses:  helaili/jekyll-action@v2
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
