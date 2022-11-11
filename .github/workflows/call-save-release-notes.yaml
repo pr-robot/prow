@@ -16,13 +16,9 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${latest_release}.md
-
-      - name: web-site
-        run: |
-            sudo apt-get install ruby-full build-essential zlib1g-dev
-            sudo gem install jekyll bundler
-            jekyll new myblog
-            mv myblog/* ./
+              mkdir -p docs/honkit/{en,zh}/07Changelog
+              cp ${latest_release}.md docs/honkit/{en,zh}/07Changelog/${latest_release}.md
+              sed -i "/- Changelog:/a\ \ - ${latest_release}: 07Changelog/${latest_release}.md" pages.tml
 
       # - uses:  helaili/jekyll-action@v2
       #   with:
