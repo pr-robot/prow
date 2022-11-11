@@ -22,6 +22,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: web-site
         run: |
+            bundle init
             jekyll new myblog
             mv myblog/* ./
 
