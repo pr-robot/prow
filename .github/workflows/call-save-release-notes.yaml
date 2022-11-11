@@ -1,15 +1,15 @@
-name: image build kubespray
+name: save release notes to file
 
 on: [workflow_call,workflow_dispatch]
 jobs:
-  save-releasenotes:
+  save_release_notes_to_file:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: 'release-notes'
-      - name: test variable
+      - name: save
         run: |
             latest_release=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.name')
             curl \
