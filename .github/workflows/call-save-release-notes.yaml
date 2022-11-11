@@ -19,13 +19,12 @@ jobs:
 
       - name: web-site
         run: |
-            bundle init
             jekyll new myblog
             mv myblog/* ./
 
-      - uses:  helaili/jekyll-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - uses:  helaili/jekyll-action@v2
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pushes charts to another repository
         id: push_directory
