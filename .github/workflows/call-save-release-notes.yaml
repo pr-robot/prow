@@ -16,6 +16,18 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${latest_release}.md
+
+      - name: web-site
+        run: |
+            sudo apt-get install ruby-full build-essential zlib1g-dev
+            echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
+            echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+            echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
+            source ~/.bashrc
+            gem install jekyll bundler
+            jekyll new myblog
+            mv myblog/* ./
+
       - name: Pushes charts to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
