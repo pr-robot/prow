@@ -17,14 +17,15 @@ jobs:
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${latest_release}.md
 
-      - uses:  helaili/jekyll-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
       - name: web-site
         run: |
             bundle init
             jekyll new myblog
             mv myblog/* ./
+
+      - uses:  helaili/jekyll-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pushes charts to another repository
         id: push_directory
