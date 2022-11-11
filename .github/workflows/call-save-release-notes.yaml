@@ -1,0 +1,31 @@
+name: image build kubespray
+
+on: [workflow_call,workflow_dispatch]
+jobs:
+  save-releasenotes:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: 'release-notes'
+      - name: test variable
+        run: |
+            latest-release-notes-name=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.name')
+            curl \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${latest-release-notes-name}.md
+      - name: Pushes charts to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        with:
+          source-directory: .
+          destination-github-username: ${{ github.repository_owner }}
+          destination-repository-name: 'prow'
+          user-email: prow-robot@prow.io
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: release-notes

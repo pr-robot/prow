@@ -78,31 +78,8 @@ jobs:
           generate_release_notes: true
 
   save-releasenotes:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: 'release-notes'
-      - name: test variable
-        run: |
-            curl \
-              -H "Accept: application/vnd.github+json" \
-              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${GITHUB_REF_NAME}.md
-      - name: Pushes charts to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-        with:
-          source-directory: .
-          destination-github-username: ${{ github.repository_owner }}
-          destination-repository-name: 'prow'
-          user-email: prow-robot@prow.io
-          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
-          target-branch: release-notes
+    uses: ./.github/workflows/call-save-release-notes.yaml
+    secrets: inherit
 #     steps:
 #       - uses: actions/checkout@v3
 #         with:
