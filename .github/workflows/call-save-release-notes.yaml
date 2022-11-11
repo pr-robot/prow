@@ -1,4 +1,4 @@
-name: save release notes to file
+name: save release notes
 
 on: [workflow_call,workflow_dispatch]
 jobs:
