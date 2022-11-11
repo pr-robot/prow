@@ -78,6 +78,7 @@ jobs:
           generate_release_notes: true
 
   save-releasenotes:
+    needs: release
     uses: ./.github/workflows/call-save-release-notes.yaml
     secrets: inherit
 #     steps:

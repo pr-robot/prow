@@ -11,11 +11,11 @@ jobs:
           ref: 'release-notes'
       - name: test variable
         run: |
-            latest-release-notes-name=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.name')
+            latest_release=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.name')
             curl \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${latest-release-notes-name}.md
+              https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${latest_release}.md
       - name: Pushes charts to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@ssh-deploy-key
