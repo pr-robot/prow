@@ -18,12 +18,9 @@ jobs:
               https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest |yq '.body' > ${latest_release}.md
             cp -rp ${latest_release}.md docs/honkit/en/00Releases/
             cp -rp ${latest_release}.md docs/honkit/zh/00Releases/
+            rm -rf ${latest_release}.md
             sed -i "/Release Notes/a\ \ \* [Release ${latest_release}](00Releases/${latest_release}.md)" docs/honkit/en/SUMMARY.md
             sed -i "/Release Notes/a\ \ \* [Release ${latest_release}](00Releases/${latest_release}.md)" docs/honkit/zh/SUMMARY.md
-            rm -rf ${latest_release}.md
-      # - uses:  helaili/jekyll-action@v2
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Pushes charts to another repository
         id: push_directory
