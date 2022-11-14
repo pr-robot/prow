@@ -2,6 +2,7 @@
 * [简介](README.md)
 # 大纲目录
 * [Release Notes](00Releases/README.md)
+  * [Release v0.2.57](00Releases/v0.2.57.md)
   * [Release 0.0.6](00Releases/0.0.6.md)  
 * [产品介绍](01Intro/README.md)
   * [功能总览](01Intro/features.md)
