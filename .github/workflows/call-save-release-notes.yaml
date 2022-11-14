@@ -5,6 +5,9 @@ jobs:
   save-release-notes-to-file:
     runs-on: ubuntu-latest
     steps:
+      - name: clear cache
+        run: |
+            rm -rf *
       - name: Checkout
         uses: actions/checkout@v2
         with:
