@@ -14,6 +14,7 @@
   * [Release v0.2.53](00Releases/v0.2.53.md)
 
 * [Release Notes](00Releases/README.md)
+  * [Release v0.2.56](00Releases/v0.2.56.md)
   * [Release v0.2.55](00Releases/v0.2.55.md)
   * [Release v0.2.53](00Releases/v0.2.53.md)
   * [Release v0.2.52](00Releases/v0.2.52.md)

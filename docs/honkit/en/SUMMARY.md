@@ -2,6 +2,7 @@
 * [Introduction](README.md)
 # Outline
 * [Release Notes](00Releases/README.md)
+  * [Release v0.2.56](00Releases/v0.2.56.md)
   * [Release v0.2.55](00Releases/v0.2.55.md)
   * [Release 0.0.6](00Releases/0.1.md)
 * [Introduction](01Intro/README.md)
