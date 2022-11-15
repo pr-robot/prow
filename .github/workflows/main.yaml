@@ -155,6 +155,30 @@ on:
         required: true
         type: string
         default: "amd64 arm64"
+      kube_version:
+        required: true
+        type: string
+        default: "v1.24.6 v1.24.4"
+      calico_version:
+        required: true
+        type: string
+        default: "v3.23.3"
+      cni_version:
+        required: true
+        type: string
+        default: "v1.1.1"
+      containerd_version:
+        required: true
+        type: string
+        default: "1.6.8"
+      cilium_version:
+        required: true
+        type: string
+        default: "v1.12.1"
+      etcd_version:
+        required: true
+        type: string
+        default: "v3.5.3"
 jobs:
   build1:
     # needs: output-variable
@@ -162,32 +186,62 @@ jobs:
     steps:
       - name: test variable
         run: |
-          # cat > manifest.yml << 'EOF'
-          # image_arch:
-          #   - "amd64"
-          #   - "arm64"
-          # kube_version:
-          #   - "v1.24.6"
-          #   - "v1.24.4"
-          # calico_version:
-          #   - "v3.23.3"
-          # cni_version:
-          #   - "v1.1.1"
-          # containerd_version:
-          #   - "1.6.8"
-          # cilium_version:
-          #   - "v1.12.1"
-          # etcd_version:
-          #   - "v3.5.3"
-          # EOF
-          # cat manifest.yml
+          cat > manifest.yml << EOF
+          image_arch:
+          kube_version:
+          calico_version:
+          cni_version:
+          containerd_version:
+          cilium_version:
+          etcd_version:
+          EOF
 
-          echo ${{ inputs.image_arch }}
-          for i in ${{ inputs.image_arch }}
+          for i in $(cat manifest.yml)
           do
-            echo 我是${i};
+              a=0
+              for k in ${{ inputs.${i} }}
+              do
+                echo 我是${k};
+                yq ".${i}[${a}]=env(k)" manifest.yml
+                cat manifest.yml
+                a=a+1
+              done
           done
-
+          #
+          # for i in ${{ inputs.image_arch }}
+          # do
+          #   echo 我是${i};
+          # done
+          #
+          # for i in ${{ inputs.kube_version }}
+          # do
+          #   echo 我是${i};
+          # done
+          #
+          # for i in ${{ inputs.calico_version }}
+          # do
+          #   echo 我是${i};
+          # done
+          #
+          # for i in ${{ inputs.cni_version }}
+          # do
+          #   echo 我是${i};
+          # done
+          #
+          # for i in ${{ inputs.containerd_version }}
+          # do
+          #   echo 我是${i};
+          # done
+          #
+          # for i in ${{ inputs.cilium_version }}
+          # do
+          #   echo 我是${i};
+          # done
+          #
+          # for i in ${{ inputs.etcd_version }}
+          # do
+          #   echo 我是${i};
+          # done
 #   build2:
 #     needs: [build1,output-variable]
 #     uses: ./.github/workflows/call-test1.yaml
