@@ -203,8 +203,6 @@ jobs:
           etcd_version:
           EOF
 
-          cat manifest.yml
-
           if [ -n "${{ inputs.image_arch }}" ]; then
             a=0
             for i in ${{ inputs.image_arch }}
@@ -279,6 +277,8 @@ jobs:
             echo "There are no updates"
             exit
           fi
+
+          cat manifest.yml
 
           docker run -v $(pwd)/manifest.yml:/manifest.yml -v $(pwd)/data:/data ghcr.io/hangscer8/airgap-patch:v0.2.0
 
