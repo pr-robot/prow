@@ -200,7 +200,7 @@ jobs:
           for i in ${{ inputs.image_arch }}
           do
             echo 我是${i};
-            yq ".${i}[${a}]=env(k)" manifest.yml
+            yq -i ".${i}[${a}]=env(i)" manifest.yml
             cat manifest.yml
             a=a+1
           done
