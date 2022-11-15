@@ -196,70 +196,71 @@ jobs:
           cilium_version:
           etcd_version:
           EOF
+          export image_arch=${{ inputs.image_arch }}
 
-          if [ -n "${{ inputs.image_arch }}" ]; then
+          if [ -n "${image_arch}" ]; then
             a=0
-            for i in ${{ inputs.image_arch }}
+            for i in ${image_arch}
             do
               export i
               yq -i ".image_arch[${a}]=env(i)" manifest.yml
               let a=a+1
             done
           fi
-
-          if [ -n "${{ inputs.kube_version }}" ]; then
+          export kube_version=${{ inputs.kube_version }}
+          if [ -n "${kube_version}" ]; then
             a=0
-            for i in ${{ inputs.kube_version }}
+            for i in ${kube_version}
             do
               export i
               yq -i ".kube_version[${a}]=env(i)" manifest.yml
               let a=a+1
             done
           fi
-
-          if [ -n "${{ inputs.calico_version }}" ]; then
+          export calico_version=${{ inputs.calico_version }}
+          if [ -n "${calico_version}" ]; then
             a=0
-            for i in ${{ inputs.calico_version }}
+            for i in ${calico_version}
             do
               export i
               yq -i ".calico_version[${a}]=env(i)" manifest.yml
               let a=a+1
             done
           fi
-
-          if [ -n "${{ inputs.cni_version }}" ]; then
+          export cni_version=${{ inputs.cni_version }}
+          if [ -n "${cni_version}" ]; then
             a=0
-            for i in ${{ inputs.cni_version }}
+            for i in ${cni_version}
             do
               export i
               yq -i ".cni_version[${a}]=env(i)" manifest.yml
               let a=a+1
             done
           fi
-
-          if [ -n "${{ inputs.containerd_version }}" ]; then
+          export containerd_version=${{ inputs.containerd_version }}
+          if [ -n "${containerd_version}" ]; then
             a=0
-            for i in ${{ inputs.containerd_version }}
+            for i in ${containerd_version}
             do
               export i
               yq -i ".containerd_version[${a}]=env(i)" manifest.yml
               let a=a+1
             done
           fi
-
-          if [ -n "${{ inputs.cilium_version }}" ]; then
+          export cilium_version=${{ inputs.cilium_version }}
+          if [ -n "${cilium_version}" ]; then
             a=0
-            for i in ${{ inputs.cilium_version }}
+            for i in ${cilium_version}
             do
               export i
               yq -i ".cilium_version[${a}]=env(i)" manifest.yml
               let a=a+1
             done
           fi
-
-          if [ -n "${{ inputs.etcd_version }}" ]; then
+          export etcd_version=${{ inputs.etcd_version }}
+          if [ -n "${etcd_version}" ]; then
             a=0
-            for i in ${{ inputs.etcd_version }}
+            for i in ${etcd_version}
             do
               export i
               yq -i ".etcd_version[${a}]=env(i)" manifest.yml
