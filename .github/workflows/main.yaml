@@ -158,31 +158,24 @@ on:
       image_arch:
         required: false
         type: string
-        default: "amd64 arm64"
       kube_version:
         required: false
         type: string
-        default: "v1.24.6 v1.24.4"
       calico_version:
         required: false
         type: string
-        default: "v3.23.3"
       cni_version:
         required: false
         type: string
-        default: "v1.1.1"
       containerd_version:
         required: false
         type: string
-        default: "1.6.8"
       cilium_version:
         required: false
         type: string
-        default: "v1.12.1"
       etcd_version:
         required: false
         type: string
-        default: "v3.5.3"
 jobs:
   incremental-packages:
     # needs: output-variable
