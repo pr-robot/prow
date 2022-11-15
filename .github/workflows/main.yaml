@@ -156,8 +156,9 @@ on:
         type: string
         default: "add_etcd_version"
       image_arch:
-        required: false
+        required: true
         type: string
+        default: "amd64 arm64"
       kube_version:
         required: false
         type: string
