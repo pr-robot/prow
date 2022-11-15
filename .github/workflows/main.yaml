@@ -152,7 +152,7 @@ on:
   workflow_dispatch:
     inputs:
       file_suffix:
-        required: false
+        required: true
         type: string
         default: "update_kube_version"
       image_arch:
