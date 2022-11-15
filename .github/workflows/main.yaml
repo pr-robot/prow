@@ -151,6 +151,10 @@ name: Main
 on:
   workflow_dispatch:
     inputs:
+      file_suffix:
+        required: true
+        type: string
+        default: "update_kube_version"
       image_arch:
         required: true
         type: string
@@ -256,7 +260,22 @@ jobs:
 
           docker run -v $(pwd)/manifest.yml:/manifest.yml -v $(pwd)/data:/data ghcr.io/hangscer8/airgap-patch:v0.2.0
 
-          tar zcvf test.tar.gz $(pwd)/data 
+          DATE=$(date "+%Y-%m-%d")
+          mv manifest.yml manifest-${DATE}.yml
+          tar zcvf kubean-incremental-${DATE}.tar.gz $(pwd)/data
+          sha512sum kubean-incremental-${DATE}.tar.gz > kubean-incremental-${DATE}-checksum.txt
+
+          OFFLINE_NGINX_IP=${{ secrets.OFFLINE_NGINX_IP }}
+          OFFLINE_NGINX_PASSWORD=${{ secrets.OFFLINE_NGINX_PASSWORD }}
+          FILE_SUFFIX=${{ inputs.file_suffix }}
+
+          sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -rp kubean-incremental-${DATE}-${FILE_SUFFIX}-checksum.txt root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental/ && \
+          echo "Success Upload checksum file to intranet nginx"
+          sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -rp kubean-incremental-${DATE}-${FILE_SUFFIX}.tar.gz root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental/ && \
+          echo "Success Upload incremental offline package to intranet nginx"
+          sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -rp manifest-${DATE}-${FILE_SUFFIX}.yml root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental/ && \
+          echo "Success Upload incremental offline manifest to intranet nginx"
+
 #   build2:
 #     needs: [build1,output-variable]
 #     uses: ./.github/workflows/call-test1.yaml
