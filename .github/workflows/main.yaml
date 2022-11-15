@@ -182,7 +182,7 @@ on:
 jobs:
   build1:
     # needs: output-variable
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: test variable
         run: |
@@ -253,6 +253,10 @@ jobs:
           done
 
           cat manifest.yml
+
+          docker run -v $(pwd)/manifest.yml:/manifest.yml -v $(pwd)/data:/data ghcr.io/hangscer8/airgap-patch:v0.2.0
+
+          tar zcvf test.tar.gz $(pwd)/data 
 #   build2:
 #     needs: [build1,output-variable]
 #     uses: ./.github/workflows/call-test1.yaml
