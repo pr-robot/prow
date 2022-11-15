@@ -190,6 +190,9 @@ jobs:
     steps:
       - name: test variable
         run: |
+          # clear cache
+          rm -rf *
+
           cat > manifest.yml << EOF
           image_arch:
           kube_version:
