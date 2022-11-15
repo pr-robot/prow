@@ -203,42 +203,56 @@ jobs:
             yq -i ".image_arch[${a}]=env(i)" manifest.yml
             let a=a+1
           done
-                      cat manifest.yml
-          #
-          # for i in ${{ inputs.image_arch }}
-          # do
-          #   echo 我是${i};
-          # done
-          #
-          # for i in ${{ inputs.kube_version }}
-          # do
-          #   echo 我是${i};
-          # done
-          #
-          # for i in ${{ inputs.calico_version }}
-          # do
-          #   echo 我是${i};
-          # done
-          #
-          # for i in ${{ inputs.cni_version }}
-          # do
-          #   echo 我是${i};
-          # done
-          #
-          # for i in ${{ inputs.containerd_version }}
-          # do
-          #   echo 我是${i};
-          # done
-          #
-          # for i in ${{ inputs.cilium_version }}
-          # do
-          #   echo 我是${i};
-          # done
-          #
-          # for i in ${{ inputs.etcd_version }}
-          # do
-          #   echo 我是${i};
-          # done
+
+          a=0
+          for i in ${{ inputs.kube_version }}
+          do
+            export i
+            yq -i ".kube_version[${a}]=env(i)" manifest.yml
+            let a=a+1
+          done
+
+          a=0
+          for i in ${{ inputs.calico_version }}
+          do
+            export i
+            yq -i ".calico_version[${a}]=env(i)" manifest.yml
+            let a=a+1
+          done
+
+          a=0
+          for i in ${{ inputs.cni_version }}
+          do
+            export i
+            yq -i ".cni_version[${a}]=env(i)" manifest.yml
+            let a=a+1
+          done
+
+          a=0
+          for i in ${{ inputs.containerd_version }}
+          do
+            export i
+            yq -i ".containerd_version[${a}]=env(i)" manifest.yml
+            let a=a+1
+          done
+
+          a=0
+          for i in ${{ inputs.cilium_version }}
+          do
+            export i
+            yq -i ".cilium_version[${a}]=env(i)" manifest.yml
+            let a=a+1
+          done
+
+          a=0
+          for i in ${{ inputs.etcd_version }}
+          do
+            export i
+            yq -i ".etcd_version[${a}]=env(i)" manifest.yml
+            let a=a+1
+          done
+
+          cat manifest.yml
 #   build2:
 #     needs: [build1,output-variable]
 #     uses: ./.github/workflows/call-test1.yaml
