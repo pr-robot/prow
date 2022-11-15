@@ -196,16 +196,13 @@ jobs:
           etcd_version:
           EOF
 
-          for i in $(cat manifest.yml)
+          a=0
+          for i in ${{ inputs.image_arch }}
           do
-              a=0
-              for k in ${{ inputs.${i} }}
-              do
-                echo 我是${k};
-                yq ".${i}[${a}]=env(k)" manifest.yml
-                cat manifest.yml
-                a=a+1
-              done
+            echo 我是${i};
+            yq ".${i}[${a}]=env(k)" manifest.yml
+            cat manifest.yml
+            a=a+1
           done
           #
           # for i in ${{ inputs.image_arch }}
