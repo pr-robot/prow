@@ -127,7 +127,7 @@ on:
     image_arch:
       required: true
       type: string
-      default: "(amd64 arm64)"
+      default: "amd64 arm64"
     # kube_version:
     #   required: true
     #   type: string
