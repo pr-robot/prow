@@ -201,7 +201,7 @@ jobs:
           do
             echo 我是${i};
             export i
-            yq -i ".image_arch[${a}]=${i}" manifest.yml
+            yq -i ".image_arch[${a}]=env(i)" manifest.yml
             cat manifest.yml
             a=a+1
           done
