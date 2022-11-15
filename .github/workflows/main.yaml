@@ -182,8 +182,8 @@ jobs:
           # EOF
           # cat manifest.yml
 
-          echo $image_arch
-          for i in $image_arch
+          echo ${{ inputs.image_arch }}
+          for i in ${{ inputs.image_arch }}
           do
             echo 我是${i};
           done
