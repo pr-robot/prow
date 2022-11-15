@@ -34,12 +34,12 @@
 #       test: ${{ steps.output_variables.outputs.test }}
 #       # aaa: ${{ steps.output_variables.outputs.aaa }}
 #       # tessst: ${{ steps.output_variables.outputs.tessst }}
-
+#
 # name: Main
 #
 # on: push
-# permissions:
-#   contents: write
+# # permissions:
+# #   contents: write
 # jobs:
 #   build:
 #     runs-on: ubuntu-latest
@@ -57,40 +57,40 @@
 #           token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
 #           files: Release.txt
 #           generate_release_notes: true
-name: Main
-
-on:
-  push:
-    tags:
-      - "v*.*.*"
-
-jobs:
-  auto-generate-release-notes:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          generate_release_notes: true
-
-  save-release-notes-to-file:
-    needs: auto-generate-release-notes
-    uses: ./.github/workflows/call-save-release-notes.yaml
-    secrets: inherit
+# name: Main
+#
+# on:
+#   push:
+#     tags:
+#       - "v*.*.*"
+#
+# jobs:
+#   auto-generate-release-notes:
+#     runs-on: ubuntu-latest
 #     steps:
-#       - uses: actions/checkout@v3
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Release
+#         uses: softprops/action-gh-release@v1
+#         if: startsWith(github.ref, 'refs/tags/')
 #         with:
-#           fetch-depth: 0
-
-#       - name: set environment variable
-#         run: |
-#           AAAAAAA="我是A"
-#           export BBBBBBB="我是B"
-#           echo "CCCCCCC=${AAAAAAA,,}" >> ${GITHUB_ENV} # 由于每个job的文件系统都是独立的，本job产生的env没法被其他job使用
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           generate_release_notes: true
+#
+  # save-release-notes-to-file:
+    # needs: auto-generate-release-notes
+    # uses: ./.github/workflows/call-save-release-notes.yaml
+    # secrets: inherit
+    # steps:
+    #   - uses: actions/checkout@v3
+    #     with:
+    #       fetch-depth: 0
+    #
+    #   - name: set environment variable
+    #     run: |
+    #       AAAAAAA="我是A"
+    #       export BBBBBBB="我是B"
+    #       echo "CCCCCCC=${AAAAAAA,,}" >> ${GITHUB_ENV} # 由于每个job的文件系统都是独立的，本job产生的env没法被其他job使用
 #       - name: output environment variable
 #         id: output_variables
 #         run: |
@@ -119,13 +119,37 @@ jobs:
 
 #           echo "test=${AAA}" >> $GITHUB_OUTPUT
 
-#   build1:
-#     needs: output-variable
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: test variable
-#         run: |
-#           echo "main输出变量 ${{ needs.output-variable.outputs.test }}"
+name: Main
+
+on: push
+# permissions:
+#   contents: write
+jobs:
+  build1:
+    # needs: output-variable
+    runs-on: ubuntu-latest
+    steps:
+      - name: test variable
+        run: |
+          cat > manifest.yml << 'EOF'
+          image_arch:
+            - "amd64"
+            - "arm64"
+          kube_version:
+            - "v1.24.6"
+            - "v1.24.4"
+          calico_version:
+            - "v3.23.3"
+          cni_version:
+            - "v1.1.1"
+          containerd_version:
+            - "1.6.8"
+          cilium_version:
+            - "v1.12.1"
+          etcd_version:
+            - "v3.5.3"
+          EOF
+          cat manifest.yml
 
 #   build2:
 #     needs: [build1,output-variable]
