@@ -152,35 +152,35 @@ on:
   workflow_dispatch:
     inputs:
       file_suffix:
-        required: true
+        required: false
         type: string
         default: "update_kube_version"
       image_arch:
-        required: true
+        required: false
         type: string
         default: "amd64 arm64"
       kube_version:
-        required: true
+        required: false
         type: string
         default: "v1.24.6 v1.24.4"
       calico_version:
-        required: true
+        required: false
         type: string
         default: "v3.23.3"
       cni_version:
-        required: true
+        required: false
         type: string
         default: "v1.1.1"
       containerd_version:
-        required: true
+        required: false
         type: string
         default: "1.6.8"
       cilium_version:
-        required: true
+        required: false
         type: string
         default: "v1.12.1"
       etcd_version:
-        required: true
+        required: false
         type: string
         default: "v3.5.3"
 jobs:
@@ -200,63 +200,80 @@ jobs:
           etcd_version:
           EOF
 
-          a=0
-          for i in ${{ inputs.image_arch }}
-          do
-            export i
-            yq -i ".image_arch[${a}]=env(i)" manifest.yml
-            let a=a+1
-          done
+          if [ -n "${{ inputs.image_arch }}" ]; then
+            a=0
+            for i in ${{ inputs.image_arch }}
+            do
+              export i
+              yq -i ".image_arch[${a}]=env(i)" manifest.yml
+              let a=a+1
+            done
+          fi
 
-          a=0
-          for i in ${{ inputs.kube_version }}
-          do
-            export i
-            yq -i ".kube_version[${a}]=env(i)" manifest.yml
-            let a=a+1
-          done
+          if [ -n "${{ inputs.kube_version }}" ]; then
+            a=0
+            for i in ${{ inputs.kube_version }}
+            do
+              export i
+              yq -i ".kube_version[${a}]=env(i)" manifest.yml
+              let a=a+1
+            done
+          fi
 
-          a=0
-          for i in ${{ inputs.calico_version }}
-          do
-            export i
-            yq -i ".calico_version[${a}]=env(i)" manifest.yml
-            let a=a+1
-          done
+          if [ -n "${{ inputs.calico_version }}" ]; then
+            a=0
+            for i in ${{ inputs.calico_version }}
+            do
+              export i
+              yq -i ".calico_version[${a}]=env(i)" manifest.yml
+              let a=a+1
+            done
+          fi
 
-          a=0
-          for i in ${{ inputs.cni_version }}
-          do
-            export i
-            yq -i ".cni_version[${a}]=env(i)" manifest.yml
-            let a=a+1
-          done
+          if [ -n "${{ inputs.cni_version }}" ]; then
+            a=0
+            for i in ${{ inputs.cni_version }}
+            do
+              export i
+              yq -i ".cni_version[${a}]=env(i)" manifest.yml
+              let a=a+1
+            done
+          fi
 
-          a=0
-          for i in ${{ inputs.containerd_version }}
-          do
-            export i
-            yq -i ".containerd_version[${a}]=env(i)" manifest.yml
-            let a=a+1
-          done
+          if [ -n "${{ inputs.containerd_version }}" ]; then
+            a=0
+            for i in ${{ inputs.containerd_version }}
+            do
+              export i
+              yq -i ".containerd_version[${a}]=env(i)" manifest.yml
+              let a=a+1
+            done
+          fi
 
-          a=0
-          for i in ${{ inputs.cilium_version }}
-          do
-            export i
-            yq -i ".cilium_version[${a}]=env(i)" manifest.yml
-            let a=a+1
-          done
+          if [ -n "${{ inputs.cilium_version }}" ]; then
+            a=0
+            for i in ${{ inputs.cilium_version }}
+            do
+              export i
+              yq -i ".cilium_version[${a}]=env(i)" manifest.yml
+              let a=a+1
+            done
+          fi
 
-          a=0
-          for i in ${{ inputs.etcd_version }}
-          do
-            export i
-            yq -i ".etcd_version[${a}]=env(i)" manifest.yml
-            let a=a+1
-          done
+          if [ -n "${{ inputs.etcd_version }}" ]; then
+            a=0
+            for i in ${{ inputs.etcd_version }}
+            do
+              export i
+              yq -i ".etcd_version[${a}]=env(i)" manifest.yml
+              let a=a+1
+            done
+          fi
 
-          cat manifest.yml
+          if (($(cat manifest.yml) == 7 ));then
+            echo "There are no updates"
+            exit
+          fi
 
           docker run -v $(pwd)/manifest.yml:/manifest.yml -v $(pwd)/data:/data ghcr.io/hangscer8/airgap-patch:v0.2.0
 
