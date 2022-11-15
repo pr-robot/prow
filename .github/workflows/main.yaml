@@ -154,7 +154,7 @@ on:
       file_suffix:
         required: true
         type: string
-        default: "update_kube_version"
+        default: "add_etcd_version"
       image_arch:
         required: false
         type: string
@@ -188,7 +188,7 @@ jobs:
     # needs: output-variable
     runs-on: self-hosted
     steps:
-      - name: test variable
+      - name: Generate incremental offline packages
         run: |
           # clear cache
           rm -rf *
