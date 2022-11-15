@@ -128,30 +128,30 @@ on:
         required: true
         type: string
         default: "(amd64 arm64)"
-    # kube_version:
-    #   required: true
-    #   type: string
-    #   default: "kubean-io"
-    # calico_version:
-    #   required: true
-    #   type: string
-    #   default: "linux/amd64,linux/arm64"
-    # cni_version:
-    #   required: true
-    #   type: string
-    #   default: "ghcr.io"
-    # containerd_version:
-    #   required: true
-    #   type: string
-    #   default: "linux/amd64,linux/arm64"
-    # cilium_version:
-    #   required: true
-    #   type: string
-    #   default: "ghcr.io"
-    # etcd_version:
-    #   required: true
-    #   type: string
-    #   default: "linux/amd64,linux/arm64"
+      # kube_version:
+      #   required: true
+      #   type: string
+      #   default: "kubean-io"
+      # calico_version:
+      #   required: true
+      #   type: string
+      #   default: "linux/amd64,linux/arm64"
+      # cni_version:
+      #   required: true
+      #   type: string
+      #   default: "ghcr.io"
+      # containerd_version:
+      #   required: true
+      #   type: string
+      #   default: "linux/amd64,linux/arm64"
+      # cilium_version:
+      #   required: true
+      #   type: string
+      #   default: "ghcr.io"
+      # etcd_version:
+      #   required: true
+      #   type: string
+      #   default: "linux/amd64,linux/arm64"
 # permissions:
 #   contents: write
 jobs:
