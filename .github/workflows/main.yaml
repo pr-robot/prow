@@ -184,115 +184,16 @@ jobs:
     steps:
       - name: Generate incremental offline packages
         run: |
-          # clear cache
-          rm -rf *
-
-          cat > manifest.yml << EOF
-          image_arch:
-          kube_version:
-          calico_version:
-          cni_version:
-          containerd_version:
-          cilium_version:
-          etcd_version:
-          EOF
-          export image_arch=${{ inputs.image_arch }}
-
-          if [ -n "${image_arch}" ]; then
-            a=0
-            for i in ${image_arch}
-            do
-              export i
-              yq -i ".image_arch[${a}]=env(i)" manifest.yml
-              let a=a+1
-            done
-          fi
-          export kube_version=${{ inputs.kube_version }}
-          if [ -n "${kube_version}" ]; then
-            a=0
-            for i in ${kube_version}
-            do
-              export i
-              yq -i ".kube_version[${a}]=env(i)" manifest.yml
-              let a=a+1
-            done
-          fi
-          export calico_version=${{ inputs.calico_version }}
-          if [ -n "${calico_version}" ]; then
-            a=0
-            for i in ${calico_version}
-            do
-              export i
-              yq -i ".calico_version[${a}]=env(i)" manifest.yml
-              let a=a+1
-            done
-          fi
-          export cni_version=${{ inputs.cni_version }}
-          if [ -n "${cni_version}" ]; then
-            a=0
-            for i in ${cni_version}
-            do
-              export i
-              yq -i ".cni_version[${a}]=env(i)" manifest.yml
-              let a=a+1
-            done
-          fi
-          export containerd_version=${{ inputs.containerd_version }}
-          if [ -n "${containerd_version}" ]; then
-            a=0
-            for i in ${containerd_version}
-            do
-              export i
-              yq -i ".containerd_version[${a}]=env(i)" manifest.yml
-              let a=a+1
-            done
-          fi
-          export cilium_version=${{ inputs.cilium_version }}
-          if [ -n "${cilium_version}" ]; then
-            a=0
-            for i in ${cilium_version}
-            do
-              export i
-              yq -i ".cilium_version[${a}]=env(i)" manifest.yml
-              let a=a+1
-            done
-          fi
-          export etcd_version=${{ inputs.etcd_version }}
-          if [ -n "${etcd_version}" ]; then
-            a=0
-            for i in ${etcd_version}
-            do
-              export i
-              yq -i ".etcd_version[${a}]=env(i)" manifest.yml
-              let a=a+1
-            done
-          fi
-
-          if (($(cat manifest.yml) == 7 ));then
-            echo "There are no updates"
-            exit
-          fi
-
-          cat manifest.yml
-          #
-          # docker run -v $(pwd)/manifest.yml:/manifest.yml -v $(pwd)/data:/data ghcr.io/hangscer8/airgap-patch:v0.2.0
-          #
-          # DATE=$(date "+%Y-%m-%d")
-          # mv manifest.yml manifest-${DATE}.yml
-          # tar zcvf kubean-incremental-${DATE}.tar.gz $(pwd)/data
-          # sha512sum kubean-incremental-${DATE}.tar.gz > kubean-incremental-${DATE}-checksum.txt
-          #
-          # OFFLINE_NGINX_IP=${{ secrets.OFFLINE_NGINX_IP }}
-          # OFFLINE_NGINX_PASSWORD=${{ secrets.OFFLINE_NGINX_PASSWORD }}
-          # FILE_SUFFIX=${{ inputs.file_suffix }}
-          #
-          # sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -rp kubean-incremental-${DATE}-${FILE_SUFFIX}-checksum.txt root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental-package/ && \
-          # echo "Success Upload checksum file to intranet nginx"
-          # sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -rp kubean-incremental-${DATE}-${FILE_SUFFIX}.tar.gz root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental-package/ && \
-          # echo "Success Upload incremental offline package to intranet nginx"
-          # sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -rp manifest-${DATE}-${FILE_SUFFIX}.yml root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental-package/ && \
-          # echo "Success Upload incremental offline manifest to intranet nginx"
-
+          export IMAGE_ARCH=${{ inputs.image_arch }}
+          export KUBE_VERSION=${{ inputs.kube_version }}
+          export CALICO_VERSION=${{ inputs.calico_version }}
+          export CNI_VERSION=${{ inputs.cni_version }}
+          export CONTAINERD_VERSION=${{ inputs.containerd_version }}
+          export CILIUM_VERSION=${{ inputs.cilium_version }}
+          export ETCD_VERSION=${{ inputs.etcd_version }}
+          export FILE_SUFFIX=${{ inputs.file_suffix }}
+          export OFFLINE_NGINX_IP=${{ secrets.OFFLINE_NGINX_IP }}
+          export OFFLINE_NGINX_PASSWORD=${{ secrets.OFFLINE_NGINX_PASSWORD }}
 #   build2:
 #     needs: [build1,output-variable]
 #     uses: ./.github/workflows/call-test1.yaml
