@@ -154,7 +154,7 @@ on:
       image_arch:
         required: true
         type: string
-        default: "(amd64arm64)"
+        default: "amd64 arm64"
 jobs:
   build1:
     # needs: output-variable
@@ -183,10 +183,9 @@ jobs:
           # cat manifest.yml
 
           echo $image_arch
-          for(( i=0;i<${#image_arch[@]};i++))
+          for i in $image_arch
           do
-          #${#array[@]}获取数组长度用于循环
-          echo ${image_arch[i]};
+            echo 我是${i};
           done
 
 #   build2:
