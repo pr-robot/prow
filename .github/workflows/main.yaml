@@ -194,6 +194,7 @@ jobs:
           export FILE_SUFFIX=${{ inputs.file_suffix }}
           export OFFLINE_NGINX_IP=${{ secrets.OFFLINE_NGINX_IP }}
           export OFFLINE_NGINX_PASSWORD=${{ secrets.OFFLINE_NGINX_PASSWORD }}
+          bash hack/incremental-pkgs.sh
 #   build2:
 #     needs: [build1,output-variable]
 #     uses: ./.github/workflows/call-test1.yaml
