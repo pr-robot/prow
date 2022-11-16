@@ -78,7 +78,7 @@ if [ -n "${ETCD_VERSION}" ]; then
   done
 fi
 
-if (($(cat manifest.yml) == 7 ));then
+if (($(cat manifest.yml|wc -l) == 7 ));then
   echo "There are no updates"
   exit
 fi
