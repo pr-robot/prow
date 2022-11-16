@@ -92,10 +92,6 @@ mv manifest.yml manifest-${DATE}.yml
 tar zcvf kubean-incremental-${DATE}.tar.gz $(pwd)/data
 sha512sum kubean-incremental-${DATE}.tar.gz > kubean-incremental-${DATE}-checksum.txt
 
-OFFLINE_NGINX_IP=${{ secrets.OFFLINE_NGINX_IP }}
-OFFLINE_NGINX_PASSWORD=${{ secrets.OFFLINE_NGINX_PASSWORD }}
-
-
 sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -rp kubean-incremental-${DATE}-${FILE_SUFFIX}-checksum.txt root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental-package/ && \
 echo "Success Upload checksum file to intranet nginx"
 sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -rp kubean-incremental-${DATE}-${FILE_SUFFIX}.tar.gz root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental-package/ && \
