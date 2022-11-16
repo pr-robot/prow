@@ -88,7 +88,7 @@ cat manifest.yml
 docker run -v $(pwd)/manifest.yml:/manifest.yml -v $(pwd)/data:/data ghcr.io/hangscer8/airgap-patch:v0.2.2
 
 DATE=$(date "+%Y-%m-%d")
-mv manifest.yml kubean-incremental-manifest-${DATE}-${FILE_SUFFIX}.yml
+mv manifest.yml kubean-incremental-${DATE}-${FILE_SUFFIX}-manifest.yml
 tar zcvf kubean-incremental-${DATE}-${FILE_SUFFIX}.tar.gz $(pwd)/data
 sha512sum kubean-incremental-${DATE}-${FILE_SUFFIX}.tar.gz > kubean-incremental-${DATE}-${FILE_SUFFIX}-checksum.txt
 
@@ -96,5 +96,5 @@ sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -o StrictHostKeyChecking=no -rp kubean-
 echo "Success Upload checksum file to intranet nginx"
 sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -o StrictHostKeyChecking=no -rp kubean-incremental-${DATE}-${FILE_SUFFIX}.tar.gz root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental-package/ && \
 echo "Success Upload incremental offline package to intranet nginx"
-sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -o StrictHostKeyChecking=no -rp kubean-incremental-manifest-${DATE}-${FILE_SUFFIX}.yml root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental-package/ && \
+sshpass -p ${OFFLINE_NGINX_PASSWORD} scp -o StrictHostKeyChecking=no -rp kubean-incremental-${DATE}-${FILE_SUFFIX}-manifest.yml root@${OFFLINE_NGINX_IP}:/root/release-2.19-offline/offline-files/kubean-incremental-package/ && \
 echo "Success Upload incremental offline manifest to intranet nginx"
