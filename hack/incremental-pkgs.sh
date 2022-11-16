@@ -85,7 +85,7 @@ fi
 
 cat manifest.yml
 
-docker run -v $(pwd)/manifest.yml:/manifest.yml -v $(pwd)/data:/data ghcr.io/hangscer8/airgap-patch:v0.2.1
+docker run -v $(pwd)/manifest.yml:/manifest.yml -v $(pwd)/data:/data ghcr.io/hangscer8/airgap-patch:v0.2.2
 
 DATE=$(date "+%Y-%m-%d")
 mv manifest.yml kubean-incremental-manifest-${DATE}-${FILE_SUFFIX}.yml
